@@ -2,7 +2,7 @@ from tkinter import *
 from PIL import Image, ImageTk
 import time
 
-from src import loadscreen, name_init
+from pages import loadscreen, name_init
 
 window = Tk()
 window.title('Monopoly')
