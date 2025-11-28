@@ -6,7 +6,7 @@ import random
 window = Tk()
 window.title('Monopoly')
 window.iconbitmap('assets/icon.ico')
-window.geometry('1440x1024')
+window.geometry('1280x720')
 
 global player_1_loc
 player_1_loc = 1

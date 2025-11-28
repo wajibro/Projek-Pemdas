@@ -7,7 +7,7 @@ from pages import loadscreen, name_init
 window = Tk()
 window.title('Monopoly')
 window.iconbitmap('assets/icon.ico')
-window.geometry('1440x1024')
+window.geometry('1280x720')
 # window.attributes('-fullscreen', not window.attributes('-fullscreen'))
 
 # def toggle_fullscreen(event=None):
