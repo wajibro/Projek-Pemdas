@@ -26,7 +26,7 @@ class setup:
     self.master = master
     self.frame = Frame(self.master)
 
-    self.canvas = Canvas(self.frame, width=1440, height=1024, highlightthickness=0)
+    self.canvas = Canvas(self.frame, width=1280, height=720, highlightthickness=0)
     self.canvas.pack(fill= 'both', expand= True)
 
     self.div()
