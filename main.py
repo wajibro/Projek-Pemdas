@@ -4,6 +4,16 @@ import time
 
 from pages import loadscreen, name_init
 
+def import_image(src, resize= None, rgba= None):
+  x = Image.open(src)
+
+  if resize:
+    x.resize(resize)
+  if rgba:
+    x.convert('RGBA')
+
+  return ImageTk.PhotoImage(x)
+
 window = Tk()
 window.title('Monopoly')
 window.iconbitmap('assets/icon.ico')
@@ -50,6 +60,7 @@ class screen1(setup):
 class screen2(setup):
   def __init__(self, master):
     super().__init__(master)
+    self.master.after(3000, self.showof)
 
   def changeTo(self, event=None):
     self.hide()
@@ -60,7 +71,9 @@ class screen2(setup):
 #     super().__init__(master)
 
 screen1.div = loadscreen.splash1
+
 screen2.div = loadscreen.splash2
+screen2.showof = loadscreen.showof
   
 SCREEN1 = screen1(window)
 SCREEN2 = screen2(window)
