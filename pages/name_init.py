@@ -37,11 +37,11 @@ def name_init_screen(self):
   self.btn_start= Button(self.frame, image= self.btn_bg, command= self.var_init, bg='#9BB3CD')
   self.canvas.create_window(410, 570, anchor= 'nw', window= self.btn_start)
 
-  self.player1_entry = Entry(self.frame, width= 20, font=('Arial', 20), textvariable=self.player1_name)
+  self.player1_entry = Entry(self.frame, width= 20, font=('Arial', 20), textvariable=self.player1_name, bg='#C3D827')
   self.player1_entry.place(x= 539, y= 270)
 
-  self.player2_entry = Entry(self.frame, width= 20, font=('Arial', 20), textvariable=self.player2_name)
+  self.player2_entry = Entry(self.frame, width= 20, font=('Arial', 20), textvariable=self.player2_name, bg='#C3D827')
   self.player2_entry.place(x= 539, y= 360)
 
-  self.modal_amount= Entry(self.frame, width= 18, font=('Arial', 20), textvariable=self.modal_amount)
+  self.modal_amount= Entry(self.frame, width= 18, font=('Arial', 20), textvariable=self.modal_amount, bg='#C3D827')
   self.modal_amount.place(x= 609, y= 482)
