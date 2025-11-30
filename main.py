@@ -62,21 +62,42 @@ class screen2(setup):
     super().__init__(master)
     self.master.after(3000, self.showof)
 
+    window.bind('<Return>', self.changeTo)
+
   def changeTo(self, event=None):
     self.hide()
-    # SCREEN3.show()
+    SCREEN3.show()
 
-# class screen3(setup):
-#   def __init__(self, master):
-#     super().__init__(master)
+class screen3(setup):
+  def __init__(self, master):
+    super().__init__(master)
+
+    self.player1_name= StringVar()
+    self.player2_name= StringVar()
+    self.modal_amount= StringVar()
+
+  def div(self):
+    pass
+
+  def var_init(self):
+    with open('src/player1_name.txt', 'w') as file:
+      file.write(self.player1_name.get())
+
+    with open('src/player2_name.txt', 'w') as file:
+      file.write(self.player2_name.get())
+
+    with open('src/modal_amount.txt', 'w') as file:
+      file.write(self.modal_amount.get())
 
 screen1.div = loadscreen.splash1
 
 screen2.div = loadscreen.splash2
 screen2.showof = loadscreen.showof
+
+screen3.div = name_init.name_init_screen
   
 SCREEN1 = screen1(window)
 SCREEN2 = screen2(window)
-# SCREEN3 = screen3(window)
+SCREEN3 = screen3(window)
 
 window.mainloop()
