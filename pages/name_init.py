@@ -15,6 +15,7 @@ def name_init_screen(self):
   self.player1_name= StringVar()
   self.player2_name= StringVar()
   self.modal_amount= StringVar()
+
   self.canvas.configure(bg='#9BB3CD')
 
   self.bg= import_image('assets/background_start.png')
@@ -33,7 +34,8 @@ def name_init_screen(self):
   self.canvas.create_image(364, 472, anchor= 'nw', image= self.modal_bg)
 
   self.btn_bg = import_image('assets/btn_start.png', rgba= 1)
-  self.canvas.create_image(410, 570, anchor= 'nw', image= self.btn_bg)
+  self.btn_start= Button(self.frame, image= self.btn_bg, command= self.var_init, bg='#9BB3CD')
+  self.canvas.create_window(410, 570, anchor= 'nw', window= self.btn_start)
 
   self.player1_entry = Entry(self.frame, width= 20, font=('Arial', 20), textvariable=self.player1_name)
   self.player1_entry.place(x= 539, y= 270)

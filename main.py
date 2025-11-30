@@ -72,22 +72,25 @@ class screen3(setup):
   def __init__(self, master):
     super().__init__(master)
 
-    self.player1_name= StringVar()
-    self.player2_name= StringVar()
-    self.modal_amount= StringVar()
+    self.player1_name
+    self.player2_name
+    self.modal_amount
 
-  def div(self):
-    pass
+  def var_init(self, event=None):
+    try:
+      with open('src/player1_name.txt', 'w') as file:
+        file.write(self.player1_name.get())
 
-  def var_init(self):
-    with open('src/player1_name.txt', 'w') as file:
-      file.write(self.player1_name.get())
+      with open('src/player2_name.txt', 'w') as file:
+        file.write(self.player2_name.get())
 
-    with open('src/player2_name.txt', 'w') as file:
-      file.write(self.player2_name.get())
+      with open('src/modal_amount.txt', 'w') as file:
+        file.write(self.modal_amount.get())
+    except:
+      print("variable tidak tersimpan")
 
-    with open('src/modal_amount.txt', 'w') as file:
-      file.write(self.modal_amount.get())
+    self.hide()
+    # screen4.show()
 
 screen1.div = loadscreen.splash1
 

@@ -32,5 +32,6 @@ def showof(self):
     self.title= import_image('assets/title_sub.png', rgba= 1)
     self.canvas.create_image(370, 164, anchor='nw', image=self.title)
 
-    self.btn_start= import_image('assets/btn_start.png', rgba= 1)
-    self.canvas.create_image(423, 559, anchor= 'nw', image= self.btn_start)
+    self.btn_bg= import_image('assets/btn_start.png', rgba= 1)
+    self.btn_start= Button(self.frame, image= self.btn_bg, command= self.changeTo, bg='#9BB3CD')
+    self.canvas.create_window(423, 559, anchor= 'nw', window= self.btn_start)
