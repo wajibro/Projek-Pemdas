@@ -18,7 +18,7 @@ def name_init_screen(self):
 
   self.canvas.configure(bg='#9BB3CD')
 
-  self.bg= import_image('assets/background_start.png')
+  self.bg= import_image('assets/background.png')
   self.canvas.create_image(0, 0, anchor='nw', image=self.bg)
   
   self.title = import_image('assets/title.png', rgba= 1)

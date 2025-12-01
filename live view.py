@@ -1,8 +1,9 @@
 from tkinter import *
 from PIL import Image, ImageTk
 import time
+import random
 
-from pages import loadscreen, name_init
+from pages import loadscreen, name_init, play
 
 def import_image(src, resize= None, rgba= None):
   x = Image.open(src)
@@ -35,30 +36,59 @@ class setup:
   def show(self):
     self.frame.pack(fill = 'both', expand = True)
 
-class screen3(setup):
+class screen4(setup):
   def __init__(self, master):
     super().__init__(master)
     self.show()
 
-    self.player1_name= StringVar()
-    self.player2_name= StringVar()
-    self.modal_amount= StringVar()
+    self.giliran = True
 
-  def div(self):
-    pass
+    self.kordinat = [[0,0]]
+    for i in range(0, 9): # Garis Bawah Peta
+      self.kordinat.append([1036-(48*i), 813])
 
-  def var_init(self):
-    with open('src/player1_name.txt', 'w') as file:
-      file.write(self.player1_name.get())
+    for i in range(1, 9): # Garis Kiri Peta
+      self.kordinat.append([1036-(48*8), 813-(76*i)])
 
-    with open('src/player2_name.txt', 'w') as file:
-      file.write(self.player2_name.get())
+    for i in range(1, 9): # Garis Atas Peta
+      self.kordinat.append([(1036-(48*8))+(76*i), 813-(76*8)])
 
-    with open('src/modal_amount.txt', 'w') as file:
-      file.write(self.modal_amount.get())
+    for i in range(1, 8): # Garis Kanan Peta
+      self.kordinat.append([1036, 813-(48*8)+(76*i)])
 
-screen3.div = name_init.name_init_screen
+    self.kordinat_x = [x[0] for x in self.kordinat]
+    self.kordinat_y = [x[1] for x in self.kordinat]
 
-SCREEN = screen3(window)
+    self.player1_loc = 1
+    self.player2_loc = 1
+    
+  def pawn_update(self):
+    self.canvas.delete(self.player1_pawnItem)
+    self.player1_pawnItem = self.canvas.create_image(self.kordinat_x[self.player1_loc], self.kordinat_y[self.player1_loc], anchor= 'nw',  image= self.player1_pawn)
+    self.canvas.delete(self.player2_pawnItem)
+    self.player2_pawnItem = self.canvas.create_image(self.kordinat_x[self.player2_loc], self.kordinat_y[self.player2_loc], anchor= 'nw',  image= self.player2_pawn)
+
+  def roll_1(self, event=None):
+    if self.giliran == True:
+      self.player1_loc += random.randint(1, 6)
+    elif self.giliran == False:
+      self.player2_loc += random.randint(1, 6)
+
+    self.pawn_update()
+    self.giliran = not self.giliran
+
+  def roll_2(self, event=None):
+    if self.giliran == True:
+      self.player1_loc += random.randint(1, 6) + random.randint(1, 6)
+    elif self.giliran == False:
+      self.player2_loc += random.randint(1, 6) + random.randint(1, 6)
+
+    self.pawn_update()
+    self.giliran = not self.giliran
+
+screen4.div = play.play_screen
+
+
+SCREEN = screen4(window)
 
 window.mainloop()

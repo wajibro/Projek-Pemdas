@@ -13,7 +13,7 @@ def import_image(src, resize= None, rgba= None):
 
 
 def splash1(self):
-  self.bg= import_image('assets/background_start.png')
+  self.bg= import_image('assets/background.png')
   self.canvas.create_image(0, 0, anchor='nw', image=self.bg)
 
   self.logoM = import_image('assets/logo_M.png', rgba= True)
@@ -22,7 +22,7 @@ def splash1(self):
 def splash2(self):
   self.canvas.configure(bg='#9BB3CD')
 
-  self.bg= import_image('assets/background_start.png')
+  self.bg= import_image('assets/background.png')
   self.canvas.create_image(0, 0, anchor='nw', image=self.bg)
 
 def showof(self):

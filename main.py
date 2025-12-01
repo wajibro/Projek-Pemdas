@@ -2,7 +2,7 @@ from tkinter import *
 from PIL import Image, ImageTk
 import time
 
-from pages import loadscreen, name_init
+from pages import loadscreen, name_init, play
 
 def import_image(src, resize= None, rgba= None):
   x = Image.open(src)
@@ -84,7 +84,10 @@ class screen3(setup):
       with open('src/player2_name.txt', 'w') as file:
         file.write(self.player2_name.get())
 
-      with open('src/modal_amount.txt', 'w') as file:
+      with open('src/player1_amount.txt', 'w') as file:
+        file.write(self.modal_amount.get())
+
+      with open('src/player2_amount.txt', 'w') as file:
         file.write(self.modal_amount.get())
     except:
       print("variable tidak tersimpan")
