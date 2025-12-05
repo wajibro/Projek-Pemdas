@@ -28,5 +28,3 @@ def kordinat_x():
 def kordinat_y():
   kordinat = kordinat_peta()
   return [x[1] for x in kordinat]
-
-print(len(kordinat_peta()))
