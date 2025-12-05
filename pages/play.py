@@ -20,7 +20,7 @@ def play_screen(self):
   self.player1_pawn = import_image('assets/player_1.png', png= 1)
   self.player2_pawn = import_image('assets/player_2.png', png= 1)
 
-  self.dice1_btn = Button(self.frame, text='1 Dadu', font=('Poppins', 24), command= self.roll_1)
+  self.dice1_btn = Button(self.frame, text='1 Dadu', font=('Poppins', 24), command= self.roll_dice)
   
   self.canvas.create_image(0, 0, anchor='nw', image=self.bg)
   self.canvas.create_image(0, 0, anchor='nw', image=self.bar)
