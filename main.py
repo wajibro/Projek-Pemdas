@@ -38,6 +38,7 @@ window.bind('<F11>', toggle_fullscreen)
 window.bind('<Escape>', exit_fullscreen)
 #==================================================#
 
+#============== SETUP CLASS ==============#
 class setup:
   def __init__(self, master):
     self.master = master
@@ -78,8 +79,6 @@ class screen2(setup): # Halaman awal
   def __init__(self, master):
     super().__init__(master)
     self.master.after(3000, self.showof)
-
-    window.bind('<Return>', self.changeTo) # Tekan 'Enter' kemudian jalankan self.changeTo
 
   def changeTo(self, event=None): # Menyembunyikan halaman saat ini kemudian tampilkan halaman SCREEN3
     self.hide()

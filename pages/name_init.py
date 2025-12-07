@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter import messagebox
 from PIL import Image, ImageTk
+import math
 
 def import_image(src, resize= None, png= None): # Fungsi untuk mengimport gambar
   x = Image.open(src)
@@ -63,12 +64,25 @@ def amount_set(self, x): # Mengatur ulang jumlah uang pemain ke file teks (awal 
 
 def changeTo(self):
   self.name_add(self.player1_name.get(), self.player2_name.get())
-  self.amount_set(str(self.modal_amount.get()))
 
   self.cekNama1 = self.name_read_player('player1')
   self.cekNama2 = self.name_read_player('player2')
+
   if self.cekNama1 == '' or self.cekNama2 == '':
-    messagebox.showerror("Nama pemain tidak boleh kosong!")
-  else:
-    self.hide()
-    self.screen4()
+    messagebox.showerror('Perhatikan!!', "Nama pemain tidak boleh kosong!")
+    return
+    
+  try:  
+    self.amount_set(int(self.modal_amount.get()))
+  except:
+    messagebox.showerror('Perhatikan!!', "Jumlah modal harus berupa angka!")
+    return
+  self.amount_set(str(self.modal_amount.get()))
+  self.cekUang = int(self.amount_read_player('player1'))
+
+  if self.cekUang < 10000:
+    messagebox.showerror('Perhatikan!!', "Jumlah modal harus lebih dari 100.000!")
+    return
+  
+  self.hide()
+  self.screen4()
