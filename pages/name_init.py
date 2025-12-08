@@ -33,9 +33,9 @@ def name_init_screen(self):
   #==============================# End Src Gambar #===============================#
 
   #==============================# Inisiasi Entry & Button #===============================#
-  self.player1_entry = Entry(self.frame, width= 20, font=('Arial', 20), textvariable=self.player1_name, bg='#C3D827')
-  self.player2_entry = Entry(self.frame, width= 20, font=('Arial', 20), textvariable=self.player2_name, bg='#C3D827')
-  self.modal_amount= Entry(self.frame, width= 18, font=('Arial', 20), textvariable=self.modal_amount, bg='#C3D827')
+  self.player1_entry = Entry(self.frame, width= 20, font=('Poppins', 20), textvariable=self.player1_name, bg='#C3D827')
+  self.player2_entry = Entry(self.frame, width= 20, font=('Poppins', 20), textvariable=self.player2_name, bg='#C3D827')
+  self.modal_amount= Entry(self.frame, width= 18, font=('Poppins', 20), textvariable=self.modal_amount, bg='#C3D827')
   self.btn_start= Button(self.frame, image= self.btn_bg, command= self.changeTo, bg='#9BB3CD', bd=0, highlightthickness= 0 )
   #==============================# End Inisiasi Entry & Button #===============================#
   

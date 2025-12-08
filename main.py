@@ -5,7 +5,7 @@ import time
 import random
 
 from pages import loadscreen, name_init, play # Memasukkan file halaman
-from src import config, crud_player, kordinat, dadu, bidak, status_pemain
+from src import config, crud_player, kordinat, dadu, bidak, status_pemain, move_option, buy_props
 
 def import_image(src, resize= None, png= None): # Fungsi untuk mengimport gambar
   x = Image.open(src)
@@ -47,6 +47,8 @@ class setup:
     self.canvas = Canvas(self.frame, width=1280, height=720, highlightthickness=0) # Merubah master menjadi self.canvas
     self.canvas.pack(fill= 'both', expand= True)
 
+    self.show()
+    self.hide()
     self.div()
 
   def hide(self): # Fungsi untuk menghapus halaman
@@ -96,6 +98,8 @@ class screen3(setup): # Halaman inisialisasi nama pemain
   def screen4(self):
     SCREEN4.show()
     SCREEN4.stats_update()
+    
+
 #======================================#
 screen3.div = name_init.name_init_screen
 screen3.amount_set = name_init.amount_set
@@ -106,7 +110,9 @@ screen3.changeTo = name_init.changeTo
 class screen4(setup): # Halaman permainan utama
   def __init__(self, master):
     super().__init__(master)
-    self.giliran = True
+    # self.show()
+    self.giliran = False
+    self.kunci_dadu = False
 
     self.kordinat = kordinat.kordinat_peta()
     self.kordinat_x = kordinat.kordinat_x()
@@ -114,11 +120,39 @@ class screen4(setup): # Halaman permainan utama
 
     self.player1_loc = 1
     self.player2_loc = 1
+
+    self.list_dadu = import_image('assets/dadu_0.png', png=1)
+    self.dadu_img_item = self.canvas.create_image(252, 637, anchor='nw', image=self.list_dadu)
+
 #======================================#
+# Tampilan Peta
 screen4.div = play.play_screen
+
+# Sistem Lempar Dadu
+screen4.roll_dice = dadu.roll_dice
+screen4.pos_increase = dadu.pos_increase
+
+# Update Tampilan Dadu
+screen4.dice_img = dadu.dice_img
+screen4.dadu_update = dadu.dadu_update
+
+# Update Tampilan Bidak Pemain
 screen4.pawn_update = bidak.x
-screen4.stats_update = status_pemain.x
-screen4.roll_dice = dadu.x
+
+# Update Tampilan Status Pemain
+screen4.stats_update = status_pemain.update_data
+
+# Opsi Beli Properti atau Lanjut
+screen4.ask = move_option.ask
+screen4.gonnaBuy = move_option.gonnaBuy
+screen4.nextPlayer = move_option.nextPlayer
+
+# Tampilan Pembelian
+screen4.bg_image = buy_props.bg_image
+screen4.list_kota = buy_props.list_kota
+screen4.list_harga = buy_props.list_harga
+screen4.buy1_apar = buy_props.buy1_apar
+screen4.buy2_apar = buy_props.buy2_apar
 #======================================#
 
 SCREEN1 = screen1(window)

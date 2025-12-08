@@ -30,10 +30,10 @@ for i in range(1, 8): # Garis Kanan Peta
 kordinat_x = [x[0] for x in kordinat]
 kordinat_y = [x[1] for x in kordinat]
 
-def import_image(src, size=None, rgba=False):
+def import_image(src, size=None, png=False):
     x = Image.open(src)
     
-    if rgba:
+    if png:
         x = x.convert('RGBA')
     
     if size:
@@ -61,32 +61,17 @@ class screen(setup):
   def __init__(self, master):
     super().__init__(master)
     self.show()
+    
+  def dice_img(self, x):
+    return import_image(f'assets/dadu_{x}.png', png= 1)
+  
+  
   
   def div(self):
-    self.bg = import_image('assets/background-start.png')
-    self.canvas.create_image(0, 0, anchor='nw', image= self.bg)
-
-    self.btn = Button(self.frame, text= 'Roll Dice', command= self.roll_dice)
-    self.btn.place(x=0, y=0)
-
-    self.map = import_image('assets/peta.png', size=(840,840), rgba= True)
-    self.canvas.create_image(588, 101, anchor= 'nw', image= self.map)
-
-    self.player_1_pawn = import_image('assets/player_1.png', size= (22,34), rgba= True)
-    self.player_1_pawnItem = self.canvas.create_image(kordinat_x[player_1_loc], kordinat_y[player_1_loc], anchor= 'nw',  image= self.player_1_pawn)
-
-  def roll_dice(self):
-     global player_1_loc
-     
-     x = random.randint(1, 6)
-     player_1_loc = player_1_loc + x
-     if player_1_loc > len(kordinat):
-        player_1_loc = 1
-     self.update_pawn()
-
-  def update_pawn(self):
-    self.canvas.delete(self.player_1_pawnItem)
-    self.player_1_pawnItem = self.canvas.create_image(kordinat_x[player_1_loc], kordinat_y[player_1_loc], anchor= 'nw',  image= self.player_1_pawn)
+    self.canvas.create_image(0, 0, anchor='nw', image=self.dice_img(1))
+    
+    self.cihuy = import_image('assets/dadu_1.png', png= 1)
+    self.canvas.create_image(0, 0, anchor='nw', image=self.cihuy)
 
 x = screen(window)
 
