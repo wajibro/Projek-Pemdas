@@ -66,7 +66,7 @@ setup.amount_read_player = crud_player.amount_read_player
 class screen1(setup):
   def __init__(self, master):
     super().__init__(master)
-    # self.show() # Tampilkan halaman saat program dijalankan
+    self.show() # Tampilkan halaman saat program dijalankan
     self.master.after(3000, self.changeTo) # Tunggu 3 detik kemudian jalankan self.changeTo
 
   def changeTo(self): # Menyembunyikan halaman saat ini kemudian tampilkan halaman SCREEN2
@@ -110,7 +110,7 @@ screen3.amount_set = crud_player.amount_set
 class screen4(setup): # Halaman permainan utama
   def __init__(self, master):
     super().__init__(master)
-    self.show()
+
     self.show_apar()
     self.giliran = False
     self.kunci_dadu = False
