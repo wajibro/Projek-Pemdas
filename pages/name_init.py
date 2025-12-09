@@ -52,16 +52,6 @@ def name_init_screen(self):
   #===============================# End Menempatkan Gambar, Entry, & Button #===============================#
 #========================== End desain halaman inisialisasi nama pemain ==========================#
 
-
-def amount_set(self, x): # Mengatur ulang jumlah uang pemain ke file teks (awal permainan)
-    try:
-        with open('src/data_pemain/player1_amount.txt', 'w') as file:
-            file.write(x)
-        with open('src/data_pemain/player2_amount.txt', 'w') as file:
-            file.write(x)
-    except:
-        print("Fungsi amount_set error")
-
 def changeTo(self):
   self.name_add(self.player1_name.get(), self.player2_name.get())
 

@@ -25,12 +25,12 @@ def roll_dice(self, event= None):
 def pos_increase(self):
     if self.giliran == False:
       self.player1_loc += self.dadu_num
-      if self.player1_loc >= len(self.kordinat)-1:
+      if self.player1_loc >= len(self.kordinat_x)-1:
         self.player1_loc = 1
     
     elif self.giliran == True:
       self.player2_loc += self.dadu_num
-      if self.player2_loc >= len(self.kordinat)-1:
+      if self.player2_loc >= len(self.kordinat_x)-1:
         self.player2_loc = 1
 
     match self.player1_loc:
@@ -73,7 +73,7 @@ def pos_increase(self):
     self.stats_update()
     self.dadu_update()
     self.kunci_dadu = True
-
+    
 def dadu_update(self):
   self.list_dadu = self.dice_img(self.dadu_num)
   self.canvas.delete(self.dadu_img_item)

@@ -66,7 +66,7 @@ setup.amount_read_player = crud_player.amount_read_player
 class screen1(setup):
   def __init__(self, master):
     super().__init__(master)
-    self.show() # Tampilkan halaman saat program dijalankan
+    # self.show() # Tampilkan halaman saat program dijalankan
     self.master.after(3000, self.changeTo) # Tunggu 3 detik kemudian jalankan self.changeTo
 
   def changeTo(self): # Menyembunyikan halaman saat ini kemudian tampilkan halaman SCREEN2
@@ -102,19 +102,22 @@ class screen3(setup): # Halaman inisialisasi nama pemain
 
 #======================================#
 screen3.div = name_init.name_init_screen
-screen3.amount_set = name_init.amount_set
 screen3.changeTo = name_init.changeTo
+screen3.amount_set = crud_player.amount_set
 #======================================#
       
 #============== SCREEN 4 ==============#
 class screen4(setup): # Halaman permainan utama
   def __init__(self, master):
     super().__init__(master)
-    # self.show()
+    self.show()
+    self.show_apar()
     self.giliran = False
     self.kunci_dadu = False
 
-    self.kordinat = kordinat.kordinat_peta()
+    self.props_add('player1', '')
+    self.props_add('player2', '')
+
     self.kordinat_x = kordinat.kordinat_x()
     self.kordinat_y = kordinat.kordinat_y()
 
@@ -125,6 +128,12 @@ class screen4(setup): # Halaman permainan utama
     self.dadu_img_item = self.canvas.create_image(252, 637, anchor='nw', image=self.list_dadu)
 
 #======================================#
+
+# Update Tampilan Status Pemain
+screen4.stats_update = status_pemain.update_data
+
+screen4.amount_add_player = crud_player.amount_add_player
+screen4.amount_read_player = crud_player.amount_read_player
 # Tampilan Peta
 screen4.div = play.play_screen
 
@@ -139,9 +148,6 @@ screen4.dadu_update = dadu.dadu_update
 # Update Tampilan Bidak Pemain
 screen4.pawn_update = bidak.x
 
-# Update Tampilan Status Pemain
-screen4.stats_update = status_pemain.update_data
-
 # Opsi Beli Properti atau Lanjut
 screen4.ask = move_option.ask
 screen4.gonnaBuy = move_option.gonnaBuy
@@ -151,6 +157,10 @@ screen4.nextPlayer = move_option.nextPlayer
 screen4.bg_image = buy_props.bg_image
 screen4.list_kota = buy_props.list_kota
 screen4.list_harga = buy_props.list_harga
+screen4.show_apar = buy_props.show_apar
+screen4.props_add = buy_props.props_add
+screen4.props_read = buy_props.props_read
+
 screen4.buy1_apar = buy_props.buy1_apar
 screen4.buy2_apar = buy_props.buy2_apar
 #======================================#
