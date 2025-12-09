@@ -106,10 +106,10 @@ def buy1_apar(self):
   prop_cache = self.props_read(which_player)
   player_amount = int(self.amount_read_player(which_player)) - 100000
 
-  if prop_cache == '':
+  if town_name not in prop_cache:
     self.canvas.create_image(koor_apar[which_player_loc][0][0], koor_apar[which_player_loc][0][1], anchor='nw', image=which_apar)
 
-    self.props_add(which_player, town_name)
+    self.props_add(which_player, f'{prop_cache}, {town_name}')
 
     self.amount_add_player(which_player, player_amount)
     
@@ -140,14 +140,14 @@ def buy2_apar(self):
   prop_cache = self.props_read(which_player)
   player_amount = int(self.amount_read_player(which_player)) - 100000
 
-  if prop_cache == '':
+  if town_name not in prop_cache:
     self.canvas.create_image(koor_apar[which_player_loc][0][0], koor_apar[which_player_loc][0][1], anchor='nw', image=which_apar)
     self.canvas.create_image(koor_apar[which_player_loc][1][0], koor_apar[which_player_loc][1][1], anchor='nw', image=which_apar)
 
-    self.props_add(which_player, f'{town_name}, {town_name}')
+    self.props_add(which_player, f'{prop_cache}, {town_name}, {town_name}')
     self.amount_add_player(which_player, player_amount)
     
-  elif prop_cache.count(town_name) >= 1:
+  else:
     messagebox.showerror('Perhatikan!!', "Anda sudah memiliki properti di kota ini!\nMaksimal 2 properti dalam 1 kota")  
 
   self.giliran = not self.giliran
