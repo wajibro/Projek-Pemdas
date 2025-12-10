@@ -44,15 +44,17 @@ for i in range(17, len(list_town)-1):
   town_index = list_town[i]
   koor_apar[town_index] = [1129, 147 - (47*list_town[17]) + (47*town_index)], [1129, (147+22) - (47*list_town[17]) + (47*town_index)]
 
-def props_add(self, player, prop): # Menambahkan nama pemain ke file teks
+# Simpan data pembelian properti
+def props_add(self, player, prop):
   if player == 'player1':
     with open('src/data_pemain/properti/player1_props.txt', 'w') as file:
       file.write(str(prop))
   elif player == 'player2':
     with open('src/data_pemain/properti/player2_props.txt', 'w') as file:
       file.write(str(prop))
-  
-def props_read(self, player): # Menambahkan nama pemain ke file teks
+
+# Periksa data pembelian yang sudah tersimpan
+def props_read(self, player): 
   if player == 'player1':
     with open('src/data_pemain/properti/player1_props.txt', 'r') as file:
       return file.read()
@@ -60,7 +62,8 @@ def props_read(self, player): # Menambahkan nama pemain ke file teks
     with open('src/data_pemain/properti/player2_props.txt', 'r') as file:
       return file.read()
 
-def bg_image(self, x):
+# Fungsi mengembalikan gambar background warna pada informasi harga
+def bg_image(self, x): 
   if x in list_town1:
     return import_image('assets/bg_town1.png', png= 1)
   elif x in list_town2:
@@ -78,23 +81,23 @@ def bg_image(self, x):
   elif x in list_town8:
     return import_image('assets/bg_town8.png', png= 1)
 
-def list_kota(self, x):
+# Fungsi mengembalikan nama kota
+def list_kota(self, x): 
   if x in list_town:
     return town_name[list_town.index(x)]
-  
-def list_harga(self):
-  which_player_loc = self.player2_loc if self.giliran else self.player1_loc  
 
-  self.town_title_bg = self.bg_image(which_player_loc)
-  self.town_title = self.list_kota(which_player_loc)
+# Tampilan informasi harga beli dan sewa
+def list_harga(self):
+  self.town_title_bg = self.bg_image(self.which_player_loc)
+  self.town_title = self.list_kota(self.which_player_loc)
 
   self.town_title_bg_item = self.canvas.create_image(0, 181, anchor='nw', image=self.town_title_bg)
   self.town_title_item = self.canvas.create_text(138, 184, anchor='nw', text= self.town_title, font=('Poppins', 20), fill= 'white')
 
+# Fungsi untuk membeli 1 apartement
 def buy1_apar(self):
-  which_player = 'player2' if self.giliran else 'player1'
-  which_player_loc = self.player2_loc if self.giliran else self.player1_loc
   which_apar = self.apar2_img if self.giliran else self.apar1_img
+
   # Tampilan 
   self.buy1_btn.destroy()
   self.buy2_btn.destroy()
@@ -102,33 +105,33 @@ def buy1_apar(self):
   self.buy2_price.destroy()
 
   # Fungsi
-  town_name = self.list_kota(which_player_loc)
-  prop_cache = self.props_read(which_player)
-  player_amount = int(self.amount_read_player(which_player)) - 100000
+  town_name = self.list_kota(self.which_player_loc)
+  prop_cache = self.props_read(self.which_player)
+  player_amount = int(self.amount_read_player(self.which_player)) - 100000
 
   if town_name not in prop_cache:
-    self.canvas.create_image(koor_apar[which_player_loc][0][0], koor_apar[which_player_loc][0][1], anchor='nw', image=which_apar)
+    self.canvas.create_image(koor_apar[self.which_player_loc][0][0], koor_apar[self.which_player_loc][0][1], anchor='nw', image=which_apar)
 
-    self.props_add(which_player, f'{prop_cache}, {town_name}')
+    self.props_add(self.which_player, f'{prop_cache}, {town_name}')
 
-    self.amount_add_player(which_player, player_amount)
+    self.amount_add_player(self.which_player, player_amount)
     
   elif prop_cache.count(town_name) >= 2:
     messagebox.showerror('Perhatikan!!', "Anda sudah memiliki properti di kota ini!")
   else:
-    self.canvas.create_image(koor_apar[which_player_loc][1][0], koor_apar[which_player_loc][1][1], anchor='nw', image=which_apar)
+    self.canvas.create_image(koor_apar[self.which_player_loc][1][0], koor_apar[self.which_player_loc][1][1], anchor='nw', image=which_apar)
 
-    self.props_add(which_player, f'{prop_cache}, {town_name}')
-    self.amount_add_player(which_player, player_amount)
+    self.props_add(self.which_player, f'{prop_cache}, {town_name}')
+    self.amount_add_player(self.which_player, player_amount)
 
   self.giliran = not self.giliran
   self.kunci_dadu = False
   self.stats_update()
 
+# Fungsi untuk membeli 2 apartement
 def buy2_apar(self):
-  which_player = 'player2' if self.giliran else 'player1'
-  which_player_loc = self.player2_loc if self.giliran else self.player1_loc
   which_apar = self.apar2_img if self.giliran else self.apar1_img
+  
   # Tampilan 
   self.buy1_btn.destroy()
   self.buy2_btn.destroy()
@@ -136,16 +139,16 @@ def buy2_apar(self):
   self.buy2_price.destroy()
 
   # Fungsi
-  town_name = self.list_kota(which_player_loc)
-  prop_cache = self.props_read(which_player)
-  player_amount = int(self.amount_read_player(which_player)) - 100000
+  town_name = self.list_kota(self.which_player_loc)
+  prop_cache = self.props_read(self.which_player)
+  player_amount = int(self.amount_read_player(self.which_player)) - 100000
 
   if town_name not in prop_cache:
-    self.canvas.create_image(koor_apar[which_player_loc][0][0], koor_apar[which_player_loc][0][1], anchor='nw', image=which_apar)
-    self.canvas.create_image(koor_apar[which_player_loc][1][0], koor_apar[which_player_loc][1][1], anchor='nw', image=which_apar)
+    self.canvas.create_image(koor_apar[self.which_player_loc][0][0], koor_apar[self.which_player_loc][0][1], anchor='nw', image=which_apar)
+    self.canvas.create_image(koor_apar[self.which_player_loc][1][0], koor_apar[self.which_player_loc][1][1], anchor='nw', image=which_apar)
 
-    self.props_add(which_player, f'{prop_cache}, {town_name}, {town_name}')
-    self.amount_add_player(which_player, player_amount)
+    self.props_add(self.which_player, f'{prop_cache}, {town_name}, {town_name}')
+    self.amount_add_player(self.which_player, player_amount)
     
   else:
     messagebox.showerror('Perhatikan!!', "Anda sudah memiliki properti di kota ini!\nMaksimal 2 properti dalam 1 kota")  

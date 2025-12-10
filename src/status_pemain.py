@@ -7,6 +7,15 @@ def update_data(self):
     self.player1_amount = self.amount_read_player('player1')
     self.player2_amount = self.amount_read_player('player2')
 
+    self.which_player = 'player2' if self.giliran else 'player1'
+    self.which_player_invers = 'player1' if self.giliran else 'player2'
+
+    self.which_player_name = self.player2_name if self.giliran else self.player1_name
+    self.which_player_invers = self.player1_name if self.giliran else self.player2_name
+
+    self.which_player_loc = self.player2_loc if self.giliran else self.player1_loc
+    self.which_player_loc_invers = self.player1_loc if self.giliran else self.player2_loc
+
     if hasattr(self, 'player1_amount_label'):
         self.player1_amount_label.destroy()
     if hasattr(self, 'player2_amount_label'):
@@ -20,8 +29,7 @@ def update_data(self):
     self.player2_name_label = Label(self.frame, text=f'Player 2 - {self.player2_name}', font=('Poppins', 24), bg='white')
     self.player2_amount_label = Label(self.frame, text=f'Rp. {self.player2_amount}', font=('Poppins', 24))
 
-    giliran_text = self.player2_name if self.giliran else self.player1_name
-    self.player_giliran = Label(self.frame, text=giliran_text, font=('Poppins', 24))
+    self.player_giliran = Label(self.frame, text=self.which_player_name, bg='white', font=('Poppins', 24))
     
     self.player1_name_label.place(x=24, y=7)
     self.player1_amount_label.place(x=9, y=40)
