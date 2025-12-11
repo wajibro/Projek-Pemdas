@@ -4,13 +4,11 @@ from tkinter import messagebox
 list_town = [2, 5, 6, 8, 9, 10, 12, 13, 15, 17, 20, 22, 23, 25, 28, 29, 30, 32, 33, 34, 37, 39, 40]
 
 def ask(self):
-  which_player_loc = self.player2_loc if self.giliran else self.player1_loc  
-
-  is_town = self.list_kota(self.which_player_loc)
+  self.stats_update()
+  is_town = self.list_town_name(self.which_player_loc)
   prop_cache_invers = self.props_read(self.which_player_invers)
-  print(prop_cache_invers)
 
-  if which_player_loc in list_town:
+  if self.which_player_loc in list_town:
     self.gonnaBuy_btn = Button(self.frame, text= 'Beli Properti', command= self.gonnaBuy, font=('Poppins', 18))
     self.nextPlayer_btn = Button(self.frame, text= 'Lanjut', command= self.nextPlayer, font=('Poppins', 18))
 
@@ -22,19 +20,20 @@ def ask(self):
       self.gonnaBuy_btn.destroy()
     if hasattr(self, 'nextPlayer_btn'):
       self.nextPlayer_btn.destroy()
+
     self.kunci_dadu = False
     self.giliran = not self.giliran
     self.stats_update()
   
-  if prop_cache_invers is None:
-    return
+  if prop_cache_invers == None:
+    pass
+  elif is_town == None:
+    pass
   elif is_town in prop_cache_invers:
     self.gonnaBuy_btn.destroy()
     self.nextPlayer_btn.destroy()
     
-    self.pay_props()
-    messagebox.showinfo('Informasi', f'{self.which_player_name} membayar sewa ke {self.which_player_invers} sebesar Rp. 100.000')
-    
+    self.pay_rent()
     self.kunci_dadu = False
     self.giliran = not self.giliran
     self.stats_update()

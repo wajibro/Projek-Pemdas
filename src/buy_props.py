@@ -82,17 +82,17 @@ def bg_image(self, x):
     return import_image('assets/bg_town8.png', png= 1)
 
 # Fungsi mengembalikan nama kota
-def list_kota(self, x): 
+def list_town_name(self, x): 
   if x in list_town:
     return town_name[list_town.index(x)]
 
 # Tampilan informasi harga beli dan sewa
 def list_harga(self):
-  self.town_title_bg = self.bg_image(self.which_player_loc)
-  self.town_title = self.list_kota(self.which_player_loc)
+  town_title_bg = self.bg_image(self.which_player_loc)
+  town_title = self.list_town_name(self.which_player_loc)
 
-  self.town_title_bg_item = self.canvas.create_image(0, 181, anchor='nw', image=self.town_title_bg)
-  self.town_title_item = self.canvas.create_text(138, 184, anchor='nw', text= self.town_title, font=('Poppins', 20), fill= 'white')
+  self.town_title_bg_item = self.canvas.create_image(0, 181, anchor='nw', image=town_title_bg)
+  self.town_title_item = self.canvas.create_text(138, 184, anchor='nw', text= town_title, font=('Poppins', 20), fill= 'white')
 
 # Fungsi untuk membeli 1 apartement
 def buy1_apar(self):
@@ -105,7 +105,7 @@ def buy1_apar(self):
   self.buy2_price.destroy()
 
   # Fungsi
-  town_name = self.list_kota(self.which_player_loc)
+  town_name = self.list_town_name(self.which_player_loc)
   prop_cache = self.props_read(self.which_player)
   player_amount = int(self.amount_read_player(self.which_player)) - 100000
 
@@ -139,7 +139,7 @@ def buy2_apar(self):
   self.buy2_price.destroy()
 
   # Fungsi
-  town_name = self.list_kota(self.which_player_loc)
+  town_name = self.list_town_name(self.which_player_loc)
   prop_cache = self.props_read(self.which_player)
   player_amount = int(self.amount_read_player(self.which_player)) - 100000
 

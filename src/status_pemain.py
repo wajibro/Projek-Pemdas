@@ -1,6 +1,5 @@
 from tkinter import *
 
-
 def update_data(self):
     self.player1_name = self.name_read_player('player1')
     self.player2_name = self.name_read_player('player2')
@@ -11,7 +10,7 @@ def update_data(self):
     self.which_player_invers = 'player1' if self.giliran else 'player2'
 
     self.which_player_name = self.player2_name if self.giliran else self.player1_name
-    self.which_player_invers = self.player1_name if self.giliran else self.player2_name
+    self.which_player_name_invers = self.player1_name if self.giliran else self.player2_name
 
     self.which_player_loc = self.player2_loc if self.giliran else self.player1_loc
     self.which_player_loc_invers = self.player1_loc if self.giliran else self.player2_loc

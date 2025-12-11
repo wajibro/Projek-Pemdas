@@ -75,7 +75,7 @@ setup.amount_read_player = crud_player.amount_read_player
 class screen1(setup): # Halaman Loading Awal
   def __init__(self, master):
     super().__init__(master)
-    # self.show() # Tampilkan halaman saat program dijalankan
+    self.show() # Tampilkan halaman saat program dijalankan
 
     # Tunggu 3 detik kemudian jalankan self.changeTo
     self.master.after(3000, self.changeTo) 
@@ -129,8 +129,9 @@ screen3.amount_set = crud_player.amount_set
 class screen4(setup): # Halaman permainan utama
   def __init__(self, master):
     super().__init__(master)
-    self.show()
-
+    # self.show()
+    
+    self.move_latch = False
     # Inisiasi pengambilan assets apartement
     self.show_apar()
 
@@ -149,7 +150,9 @@ class screen4(setup): # Halaman permainan utama
     self.props_add('player2', '')
 
     # Refresh tampilan data pemain
+    
     self.stats_update()
+    self.list_harga()
 
     # Pengelompokan kordinat ke dalam x dan y
     self.kordinat_x = kordinat.kordinat_x()
@@ -194,24 +197,29 @@ screen4.nextPlayer = move_option.nextPlayer
 screen4.bg_image = buy_props.bg_image
 # Tampilan daftar harga dan sewa
 screen4.list_harga = buy_props.list_harga
-# Inisiasi Pengambilas asset apartement
+# Inisiasi Pengambilan asset apartement
 screen4.show_apar = buy_props.show_apar
 #=====================================#
 
 # Fungsi mengembalikan nama kota
-screen4.list_kota = buy_props.list_kota
+screen4.list_town_name = buy_props.list_town_name
 
 #======== Fungsi Pembelian Properti =======#
 # Menambahkan data pembelian properti
 screen4.props_add = buy_props.props_add
 # Periksa data pembelian yang sudah tersimpan
 screen4.props_read = buy_props.props_read
-# Sistem bayar pemain ketika berada di kota lawan
-screen4.pay_props = action.pay_props
 # Sistem beli properti pemain
 screen4.buy1_apar = buy_props.buy1_apar
 screen4.buy2_apar = buy_props.buy2_apar
 #==========================================#
+
+screen4.start_bonus = action.start_bonus
+screen4.pay_rent = action.pay_rent
+screen4.cek_petak = action.cek_petak
+screen4.pay_tax = action.pay_tax
+screen4.pay_needs = action.pay_needs
+screen4.bansos = action.bansos
 
 #===============================================================#
 #============================================================================================#

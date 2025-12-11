@@ -40,25 +40,25 @@ def name_init_screen(self):
   #==============================# End Inisiasi Entry & Button #===============================#
   
   #==============================# Menempatkan Gambar, Entry, & Button #===============================#
-  self.canvas.create_image(0, 0, anchor='nw', image=self.bg)
-  self.canvas.create_image(442.05, 96, anchor='nw', image=self.title)
+  self.canvas.create_image(0, 0, anchor='nw', image= self.bg)
+  self.canvas.create_image(442.05, 96, anchor='nw', image= self.title)
   self.canvas.create_image(364, 259, anchor= 'nw', image= self.player1_bg)
   self.canvas.create_image(364, 352, anchor= 'nw', image= self.player2_bg)
   self.canvas.create_image(364, 472, anchor= 'nw', image= self.modal_bg)
+  self.canvas.create_window(410, 570, anchor= 'nw', window= self.btn_start)
   self.player1_entry.place(x= 539, y= 270)
   self.player2_entry.place(x= 539, y= 360)
   self.modal_amount.place(x= 609, y= 482)
-  self.canvas.create_window(410, 570, anchor= 'nw', window= self.btn_start)
   #===============================# End Menempatkan Gambar, Entry, & Button #===============================#
 #========================== End desain halaman inisialisasi nama pemain ==========================#
 
 def changeTo(self):
   self.name_add(self.player1_name.get(), self.player2_name.get())
 
-  self.cekNama1 = self.name_read_player('player1')
-  self.cekNama2 = self.name_read_player('player2')
+  cekNama1 = self.name_read_player('player1')
+  cekNama2 = self.name_read_player('player2')
 
-  if self.cekNama1 == '' or self.cekNama2 == '':
+  if cekNama1 == '' or cekNama2 == '':
     messagebox.showerror('Perhatikan!!', "Nama pemain tidak boleh kosong!")
     return
     
@@ -68,9 +68,9 @@ def changeTo(self):
     messagebox.showerror('Perhatikan!!', "Jumlah modal harus berupa angka!")
     return
   self.amount_set(str(self.modal_amount.get()))
-  self.cekUang = int(self.amount_read_player('player1'))
+  cekUang = int(self.amount_read_player('player1'))
 
-  if self.cekUang < 10000:
+  if cekUang < 10000:
     messagebox.showerror('Perhatikan!!', "Jumlah modal harus lebih dari 100.000!")
     return
   

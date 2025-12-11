@@ -13,11 +13,25 @@ def import_image(src, resize= None, png= None): # Fungsi untuk mengimport gambar
 
   return ImageTk.PhotoImage(x)
 
+move_point = 0
+
 def roll_dice(self, event= None):
+  global move_point
   if self.kunci_dadu == False:
     self.dadu_num = random.randint(1,6)
     self.pos_increase()
+    self.giliran = not self.giliran
+
+    self.cek_petak()
+    self.stats_update()
     self.ask()
+    
+    
+
+    if self.move_latch == False and move_point < 2:
+      move_point += 1
+    if move_point >= 2:
+      self.move_latch = True
     return self.dadu_num
   else:
     messagebox.showwarning('Perhatikan', "Giliran anda sudah selesai\nPilih opsi 'Beli Properti' atau 'Lanjut'")
@@ -26,12 +40,12 @@ def pos_increase(self):
     if self.giliran == False:
       self.player1_loc += self.dadu_num
       if self.player1_loc >= len(self.kordinat_x)-1:
-        self.player1_loc = 1
+        self.player1_loc += self.dadu_num - len(self.kordinat_x)-1
     
     elif self.giliran == True:
       self.player2_loc += self.dadu_num
       if self.player2_loc >= len(self.kordinat_x)-1:
-        self.player2_loc = 1
+        self.player2_loc += self.dadu_num - len(self.kordinat_x)-1
 
     match self.player1_loc:
       case 4: # Tangga 1
