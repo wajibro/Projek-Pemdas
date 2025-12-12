@@ -20,13 +20,10 @@ def roll_dice(self, event= None):
   if self.kunci_dadu == False:
     self.dadu_num = random.randint(1,6)
     self.pos_increase()
-    self.giliran = not self.giliran
-
+    
     self.cek_petak()
     self.stats_update()
     self.ask()
-    
-    
 
     if self.move_latch == False and move_point < 2:
       move_point += 1
@@ -39,13 +36,13 @@ def roll_dice(self, event= None):
 def pos_increase(self):
     if self.giliran == False:
       self.player1_loc += self.dadu_num
-      if self.player1_loc >= len(self.kordinat_x)-1:
-        self.player1_loc += self.dadu_num - len(self.kordinat_x)-1
+      if self.player1_loc > len(self.kordinat_x)-1:
+        self.player1_loc = self.player1_loc - len(self.kordinat_x) + 1
     
     elif self.giliran == True:
       self.player2_loc += self.dadu_num
-      if self.player2_loc >= len(self.kordinat_x)-1:
-        self.player2_loc += self.dadu_num - len(self.kordinat_x)-1
+      if self.player2_loc > len(self.kordinat_x)-1:
+        self.player2_loc = self.player2_loc - len(self.kordinat_x) + 1
 
     match self.player1_loc:
       case 4: # Tangga 1
@@ -82,7 +79,7 @@ def pos_increase(self):
         self.pawn_update()
         messagebox.showinfo(f'{self.player1_name} - Telah Berubah Posisi', f'{self.player2_name}, Anda telah dimakan sang ular')
         self.player2_loc = 35
-
+      
     self.pawn_update()
     self.stats_update()
     self.dadu_update()

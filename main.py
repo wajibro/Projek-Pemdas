@@ -1,5 +1,6 @@
 from tkinter import *
 from tkinter import messagebox
+from tkinter import simpledialog
 from PIL import Image, ImageTk
 import time
 import random
@@ -212,6 +213,8 @@ screen4.props_read = buy_props.props_read
 # Sistem beli properti pemain
 screen4.buy1_apar = buy_props.buy1_apar
 screen4.buy2_apar = buy_props.buy2_apar
+
+screen4.price_level = buy_props.price_level
 #==========================================#
 
 screen4.start_bonus = action.start_bonus
@@ -220,6 +223,9 @@ screen4.cek_petak = action.cek_petak
 screen4.pay_tax = action.pay_tax
 screen4.pay_needs = action.pay_needs
 screen4.bansos = action.bansos
+screen4.travelling = action.travelling
+screen4.chance_card = action.chance_card
+screen4.badluck_card = action.badluck_card
 
 #===============================================================#
 #============================================================================================#

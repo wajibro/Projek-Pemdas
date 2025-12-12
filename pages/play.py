@@ -30,3 +30,7 @@ def play_screen(self):
   self.player1_pawnItem = self.canvas.create_image(1098, 602, anchor='nw', image=self.player1_pawn) 
   self.player2_pawnItem = self.canvas.create_image(1102, 605, anchor='nw', image=self.player2_pawn)
   self.dice_btn.place(x=29, y=644)
+
+  self.show_price_item = self.canvas.create_text(246, 360, anchor='nw', text= '0', font=('Poppins', 16), fill= 'black')
+  self.show_rent1_item = self.canvas.create_text(281, 264, anchor='nw', text= '0', font=('Poppins', 16), fill= 'black')
+  self.show_rent2_item = self.canvas.create_text(281, 294, anchor='nw', text= '0', font=('Poppins', 16), fill= 'black')
