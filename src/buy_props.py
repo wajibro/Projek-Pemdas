@@ -1,6 +1,5 @@
 from tkinter import *
 from tkinter import messagebox
-import numpy as np
 from PIL import Image, ImageTk
 
 def import_image(src, resize= None, png= None): # Fungsi untuk mengimport gambar
