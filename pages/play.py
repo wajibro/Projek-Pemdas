@@ -19,6 +19,7 @@ def play_screen(self):
   self.peta = import_image('assets/peta.png')  
   self.player1_pawn = import_image('assets/player_1.png', png= 1)
   self.player2_pawn = import_image('assets/player_2.png', png= 1)
+  self.penjara_import = import_image('assets/penjara.png', png= 1)
 
   self.dice_btn = Button(self.frame, text='Lempar', font=('Poppins', 24), command= self.roll_dice, pady= 2, padx = 1)
   
@@ -27,6 +28,7 @@ def play_screen(self):
   self.canvas.create_image(9, 16, anchor='nw', image=self.player1_pawn)
   self.canvas.create_image(9, 92, anchor='nw', image=self.player2_pawn)
   self.canvas.create_image(558, 64, anchor='nw', image=self.peta)
+  self.penjara_img = self.canvas.create_image(1067, 66, anchor='nw', image=self.penjara_import)
   self.player1_pawnItem = self.canvas.create_image(1098, 602, anchor='nw', image=self.player1_pawn) 
   self.player2_pawnItem = self.canvas.create_image(1102, 605, anchor='nw', image=self.player2_pawn)
   self.dice_btn.place(x=29, y=644)

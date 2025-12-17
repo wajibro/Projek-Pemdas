@@ -76,7 +76,7 @@ setup.amount_read_player = crud_player.amount_read_player
 class screen1(setup): # Halaman Loading Awal
   def __init__(self, master):
     super().__init__(master)
-    self.show() # Tampilkan halaman saat program dijalankan
+    # self.show() # Tampilkan halaman saat program dijalankan
 
     # Tunggu 3 detik kemudian jalankan self.changeTo
     self.master.after(3000, self.changeTo) 
@@ -130,9 +130,10 @@ screen3.amount_set = crud_player.amount_set
 class screen4(setup): # Halaman permainan utama
   def __init__(self, master):
     super().__init__(master)
-    # self.show()
+    self.show()
     
     self.move_latch = False
+    self.btn_allow = True
     # Inisiasi pengambilan assets apartement
     self.show_apar()
 
@@ -141,6 +142,9 @@ class screen4(setup): # Halaman permainan utama
 
     # Inisiasi sistem kunci dadu
     self.kunci_dadu = False
+
+    # Inisiasi status pemain (0: normal, 1: penjara, 2: pulau asing)
+    self.player_status = [0, 0]
 
     # Inisiasi posisi pemain
     self.player1_loc = 1
@@ -151,7 +155,6 @@ class screen4(setup): # Halaman permainan utama
     self.props_add('player2', '')
 
     # Refresh tampilan data pemain
-    
     self.stats_update()
     self.list_harga()
 
@@ -226,6 +229,8 @@ screen4.bansos = action.bansos
 screen4.travelling = action.travelling
 screen4.chance_card = action.chance_card
 screen4.badluck_card = action.badluck_card
+screen4.pulau_asing = action.pulau_asing
+screen4.penjara = action.penjara
 
 #===============================================================#
 #============================================================================================#

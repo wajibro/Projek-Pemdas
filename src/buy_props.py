@@ -123,6 +123,7 @@ def list_harga(self):
   self.show_price_item = self.canvas.create_text(246, 360, anchor='nw', text= harga, font=('Poppins', 16), fill= 'black')
   self.show_rent1_item = self.canvas.create_text(281, 264, anchor='nw', text= sewa1, font=('Poppins', 16), fill= 'black')
   self.show_rent2_item = self.canvas.create_text(281, 294, anchor='nw', text= sewa2, font=('Poppins', 16), fill= 'black')
+  
   if harga == 0:
     self.canvas.delete(self.show_price_item)
     self.canvas.delete(self.show_rent1_item)
@@ -171,9 +172,7 @@ def buy1_apar(self, event=None):
   if hasattr(self, 'nextPlayer_btn'):
     self.nextPlayer_btn.destroy()
   
-  self.giliran = not self.giliran
-  self.kunci_dadu = False
-  self.stats_update()
+  self.nextPlayer()
 
 # Fungsi untuk membeli 2 apartement
 def buy2_apar(self, event=None):
@@ -206,9 +205,7 @@ def buy2_apar(self, event=None):
   if hasattr(self, 'nextPlayer_btn'):
     self.nextPlayer_btn.destroy()
   
-  self.giliran = not self.giliran
-  self.kunci_dadu = False
-  self.stats_update()
+  self.nextPlayer()
 
 def show_apar(self):
   self.apar1_img = import_image('assets/apar_1.png', png= 1)
