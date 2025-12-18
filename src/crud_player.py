@@ -18,9 +18,9 @@ def name_read_player(self, player): # Membaca nama pemain dari file teks
 def amount_set(self, x): # Mengatur ulang jumlah uang pemain ke file teks (awal permainan)
   try:
     with open('src/data_pemain/uang/player1_amount.txt', 'w') as file:
-      file.write(x)
+      file.write(str(x))
     with open('src/data_pemain/uang/player2_amount.txt', 'w') as file:
-      file.write(x)
+      file.write(str(x))
   except:
     print("Fungsi amount_set error")
 
@@ -35,7 +35,9 @@ def amount_add_player(self, player, amount): # Membaca jumlah uang pemain dari f
 def amount_read_player(self, player): # Membaca jumlah uang pemain dari file teks
   if player == 'player1':
     with open('src/data_pemain/uang/player1_amount.txt', 'r') as file:
-      return file.read()
+      content = file.read()
+      return content if content else '0'
   elif player == 'player2':
     with open('src/data_pemain/uang/player2_amount.txt', 'r') as file:
-      return file.read()
+      content = file.read()
+      return content if content else '0'

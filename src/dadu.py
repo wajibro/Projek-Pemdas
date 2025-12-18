@@ -31,9 +31,10 @@ def roll_dice(self, event= None):
       
       messagebox.showinfo('Selamat!', f'{self.which_player_name} berhasil keluar dari pulau asing!')
       self.pos_increase()
-      turn_handled = self.cek_petak()
+      
+      cek_petak = self.cek_petak()
       self.stats_update()
-      if not turn_handled:
+      if not cek_petak:
         self.ask()
     else:
       messagebox.showwarning('Gagal', f'Maaf {self.which_player_name}, anda butuh dadu 6 untuk keluar.\nAnda didenda Rp 100.000')
@@ -56,11 +57,10 @@ def roll_dice(self, event= None):
     self.dadu_num = random.randint(1,6)
     self.pos_increase()
     self.action_allow = True
-    self.btn_allow = True
-    
-    turn_handled = self.cek_petak()
+
+    cek_petak = self.cek_petak()
     self.stats_update()
-    if not turn_handled:
+    if not cek_petak:
       self.ask()
 
     if self.move_latch == False and move_point < 2:
@@ -76,11 +76,13 @@ def pos_increase(self):
       self.player1_loc += self.dadu_num
       if self.player1_loc > 40:
         self.player1_loc = self.player1_loc - 40
+        self.start_bonus()
     
     elif self.giliran == True:
       self.player2_loc += self.dadu_num
       if self.player2_loc > 40:
         self.player2_loc = self.player2_loc - 40
+        self.start_bonus()
 
     match self.player1_loc:
       case 4: # Tangga 1

@@ -4,6 +4,8 @@ from tkinter import simpledialog
 from PIL import Image, ImageTk
 import time
 import random
+import ctypes
+import os
 
 # Memasukkan file halaman
 from pages import loadscreen, name_init, play 
@@ -21,6 +23,19 @@ def import_image(src, resize= None, png= None): # Fungsi untuk mengimport gambar
 
   return ImageTk.PhotoImage(x)
 
+def load_font(font_path):
+    if os.path.exists(font_path):
+        FR_PRIVATE = 0x10
+        return ctypes.windll.gdi32.AddFontResourceExW(font_path, FR_PRIVATE, 0)
+    return 0
+
+# Load the custom font
+font_path = os.path.join(os.path.dirname(__file__), 'assets', 'Poppins-Regular.ttf')
+fonts_loaded = load_font(font_path)
+if fonts_loaded == 0:
+    print(f"Warning: Could not load font at {font_path}")
+
+
 #================= SETUP WINDOW ================#
 def win_config():
    pass
@@ -29,7 +44,7 @@ window = win_config()
  #=================================================#
 
 #=============== Fungsi Fullscreen ================#
-# window.attributes('-fullscreen', not window.attributes('-fullscreen'))
+window.attributes('-fullscreen', not window.attributes('-fullscreen'))
 def toggle_fullscreen(event=None):
     window.attributes('-fullscreen', not window.attributes('-fullscreen'))
     return "break"
@@ -52,8 +67,6 @@ class setup: # Setup untuk semua halaman
     self.canvas = Canvas(self.frame, width=1280, height=720, highlightthickness=0) 
     self.canvas.pack(fill= 'both', expand= True)
 
-    self.show() # Tampilkan semua halaman saat dijalankan
-    self.hide() # Sembunyikan halaman saat dijalankan
     self.div() # Tampilkan UI tiap halaman
 
   def hide(self): # Fungsi untuk menghapus halaman
@@ -76,10 +89,9 @@ setup.amount_read_player = crud_player.amount_read_player
 class screen1(setup): # Halaman Loading Awal
   def __init__(self, master):
     super().__init__(master)
-    # self.show() # Tampilkan halaman saat program dijalankan
-
-    # Tunggu 3 detik kemudian jalankan self.changeTo
-    self.master.after(3000, self.changeTo) 
+    # Tampilkan halaman saat program dijalankan
+    self.show()
+    self.master.after(5000, self.showof)
 
   def changeTo(self):
     # Sembunyikan halaman saat ini
@@ -89,13 +101,14 @@ class screen1(setup): # Halaman Loading Awal
 #======================================#
 # Fungsi untuk tampilan
 screen1.div = loadscreen.splash1
+screen1.showof = loadscreen.showof1
+#=====================================
 #======================================#
 
 #============== SCREEN 2 ==============#
 class screen2(setup): # Halaman awal
   def __init__(self, master):
     super().__init__(master)
-
     # Tunggu 3 detik kemudian jalankan self.showof
     self.master.after(3000, self.showof)
 
@@ -106,7 +119,7 @@ class screen2(setup): # Halaman awal
     SCREEN3.show()
 #======================================#
 screen2.div = loadscreen.splash2
-screen2.showof = loadscreen.showof
+screen2.showof = loadscreen.showof2
 #======================================#
 
 #============== SCREEN 3 ==============#
@@ -118,8 +131,7 @@ class screen3(setup): # Halaman inisialisasi nama pemain
     # Tampilkan halaman SCREEN4
     SCREEN4.show()
     # Refresh tampilan data pemain
-    SCREEN4.stats_update()
-    
+    SCREEN4.stats_update() 
 #======================================#
 screen3.div = name_init.name_init_screen
 screen3.changeTo = name_init.changeTo
@@ -130,10 +142,9 @@ screen3.amount_set = crud_player.amount_set
 class screen4(setup): # Halaman permainan utama
   def __init__(self, master):
     super().__init__(master)
-    self.show()
     
+    # Variabel untuk memeriksa apakah tiap pemain sudah melempar dadu
     self.move_latch = False
-    self.btn_allow = True
     # Inisiasi pengambilan assets apartement
     self.show_apar()
 
@@ -165,6 +176,13 @@ class screen4(setup): # Halaman permainan utama
     # Inisiasi tampilan dadu
     self.list_dadu = import_image('assets/dadu_0.png', png=1)
     self.dadu_img_item = self.canvas.create_image(252, 637, anchor='nw', image=self.list_dadu)
+
+  def game_over(self, event= None):
+    messagebox.showinfo("Game Over", f"{self.which_player_name} telah bangkrut! {self.which_player_name_invers} memenangkan permainan.")
+    self.amount_set(None)
+    self.name_add('', '')
+    self.hide()
+    SCREEN2.show()
 #===============================================================================================#
 # Tampilan Peta
 screen4.div = play.play_screen
@@ -216,21 +234,35 @@ screen4.props_read = buy_props.props_read
 # Sistem beli properti pemain
 screen4.buy1_apar = buy_props.buy1_apar
 screen4.buy2_apar = buy_props.buy2_apar
+# Fungsi pemain lawan bayar sewa saat melewati kota yang memiliki properti
+screen4.pay_rent = action.pay_rent
 
 screen4.price_level = buy_props.price_level
 #==========================================#
 
-screen4.start_bonus = action.start_bonus
-screen4.pay_rent = action.pay_rent
+#======== Fungsi Untuk Memeriksa Setiap Petak yang Dilewati =======#
+# Semua fungsi dihubungkan kesini
 screen4.cek_petak = action.cek_petak
+
+# Dapat bonus saat melewati petak start
+screen4.start_bonus = action.start_bonus
+# Saat berhenti pada petak ini bayar pajak sesuai jumlah bangunan
 screen4.pay_tax = action.pay_tax
+# Saat berhenti pada petak ini bayar air atau listrik sejumlah bangunan yang dimiliki
 screen4.pay_needs = action.pay_needs
+# Saat berhenti pada petak ini dapat uang dengan nominal Rp20.000 - Rp50.000
 screen4.bansos = action.bansos
+# Saat berhenti pada petak ini pilih mendarat di petak nomor mana pun
 screen4.travelling = action.travelling
+# Saat berhenti pada petak ini mendapat kartu kesempatan yang beragam
 screen4.chance_card = action.chance_card
+# Saat berhenti pada petak ini mendapat kejadian sial yang beragam
 screen4.badluck_card = action.badluck_card
+# Saat berhenti pada petak ini tidak bisa bergerak kemanapun, lempar dadu 6 untuk bergerak atau uang berkurang Rp100.000
 screen4.pulau_asing = action.pulau_asing
+# Saat berhenti pada petak ini tidak bisa bergerak pada giliran selanjutnya sekali
 screen4.penjara = action.penjara
+#=================================================================#
 
 #===============================================================#
 #============================================================================================#
@@ -239,5 +271,15 @@ SCREEN1 = screen1(window)
 SCREEN2 = screen2(window)
 SCREEN3 = screen3(window)
 SCREEN4 = screen4(window)
+
+def tutup_jendela(event= None):
+    if messagebox.askyesno("Keluar", "Apakah Anda yakin ingin keluar dari permainan?"):
+        SCREEN3.amount_set(None)
+        SCREEN3.name_add('', '')
+        SCREEN4.props_add('player1', '')
+        SCREEN4.props_add('player2', '')
+        window.destroy()
+
+window.protocol("WM_DELETE_WINDOW", tutup_jendela)
 
 window.mainloop()

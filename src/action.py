@@ -19,7 +19,9 @@ def cek_petak(self):
   loc = self.which_player_loc
 
   # Bonus start dice/lap
-  self.start_bonus()
+  if loc == 1:
+    self.start_bonus()
+    return True
 
   if loc == 3:
     self.pay_tax()
@@ -57,21 +59,21 @@ def cek_petak(self):
 
 def start_bonus(self):
   if self.move_latch == True:
-    if self.which_player_loc == 1:
-      get_latch = False
-      if get_latch == False:
-        total_value = int(self.amount_read_player(self.which_player))
-        total_value += 100000
-        self.amount_add_player(self.which_player, int(total_value))
-        messagebox.showinfo('Bonus Start', f'{self.which_player_name} mendapat bonus sebesar Rp.100.000 saat melewati start')
-        get_latch = True
-        self.kunci_dadu = False
-        if hasattr(self, 'gonnaBuy_btn'):
-          self.gonnaBuy_btn.destroy()
-        if hasattr(self, 'nextPlayer_btn'):
-          self.nextPlayer_btn.destroy()
-        
-        self.nextPlayer()
+    get_latch = False
+    if get_latch == False:
+      total_value = int(self.amount_read_player(self.which_player))
+      total_value += 100000
+      self.amount_add_player(self.which_player, int(total_value))
+      bonus_amount = 100000
+      messagebox.showinfo('Bonus Start', f'{self.which_player_name} mendapat bonus sebesar Rp.{bonus_amount:,.0f}'.replace(',', '.'))
+      get_latch = True
+      self.kunci_dadu = False
+      if hasattr(self, 'gonnaBuy_btn'):
+        self.gonnaBuy_btn.destroy()
+      if hasattr(self, 'nextPlayer_btn'):
+        self.nextPlayer_btn.destroy()
+      
+      self.nextPlayer()
 
 def pay_rent(self):
     town_name = self.list_town_name(self.which_player_loc)
@@ -94,7 +96,7 @@ def pay_rent(self):
 
     # Tampilkan pesan dengan jumlah yang sesuai
     rent_amount = base_rent * 2 if prop_cache.count(town_name) >= 2 else base_rent
-    messagebox.showinfo('Informasi', f'{self.which_player_name} membayar sewa ke {self.which_player_name_invers} sebesar Rp. {rent_amount}')
+    messagebox.showinfo('Informasi', f'{self.which_player_name} membayar sewa ke {self.which_player_name_invers} sebesar Rp. {f"{rent_amount:,}".replace(",", ".")}')
 
 def pay_tax(self):
   cekProperti = self.props_read(self.which_player)
@@ -108,10 +110,10 @@ def pay_tax(self):
 
   if cekProperti != '':
     self.amount_add_player(self.which_player, int(total_value))
-    messagebox.showinfo('Pembayaran pajak', f'{self.which_player_name} membayar pajak sebesar Rp.{total_tax}\nDengan bangunan sejumlah {len(daftar_properti)-1}')
+    messagebox.showinfo('Pembayaran pajak', f'{self.which_player_name} membayar pajak sebesar Rp.{f"{int(total_tax):,}".replace(",", ".")}\nDengan bangunan sejumlah {len(daftar_properti)-1}')
   else:
     self.amount_add_player(self.which_player, int(total_value))
-    messagebox.showinfo('Pembayaran pajak', f'{self.which_player_name} membayar pajak sebesar Rp.{total_tax}\nTanpa bangunan')
+    messagebox.showinfo('Pembayaran pajak', f'{self.which_player_name} membayar pajak sebesar Rp.{f"{int(total_tax):,}".replace(",", ".")}\nTanpa bangunan')
 
   self.kunci_dadu = False
   if hasattr(self, 'gonnaBuy_btn'):
@@ -134,7 +136,7 @@ def pay_needs(self):
       messagebox.showinfo('Informasi', f'{self.which_player_name} anda tidak memiliki tagihan listrik')
     else:
       self.amount_add_player(self.which_player, int(total_value))
-      messagebox.showinfo('Pembayaran listrik', f'{self.which_player_name} membayar listrik sebesar Rp.{total_pay}\nDengan bangunan sejumlah {len(daftar_properti)-1}')
+      messagebox.showinfo('Pembayaran listrik', f'{self.which_player_name} membayar listrik sebesar Rp.{f"{int(total_pay):,}".replace(",", ".")}\nDengan bangunan sejumlah {len(daftar_properti)-1}')
     self.nextPlayer()
 
   if self.which_player_loc == 35:
@@ -142,7 +144,7 @@ def pay_needs(self):
       messagebox.showinfo('Informasi', f'{self.which_player_name} anda tidak memiliki tagihan air')
     else:
       self.amount_add_player(self.which_player, int(total_value))
-      messagebox.showinfo('Pembayaran air', f'{self.which_player_name} membayar air sebesar Rp.{total_pay}\nDengan bangunan sejumlah {len(daftar_properti)}')
+      messagebox.showinfo('Pembayaran air', f'{self.which_player_name} membayar air sebesar Rp.{f"{int(total_pay):,}".replace(",", ".")}\nDengan bangunan sejumlah {len(daftar_properti)}')
     self.nextPlayer()
 
 def bansos(self):
@@ -152,7 +154,7 @@ def bansos(self):
   total_value = int(total_value)
 
   self.amount_add_player(self.which_player, int(total_value))
-  messagebox.showinfo('Dapat Bansos', f'Selamat {self.which_player_name}, kamu mendapat bansos sebesar {total_get}')
+  messagebox.showinfo('Dapat Bansos', f'Selamat {self.which_player_name}, kamu mendapat bansos sebesar Rp. {f"{total_get:,}".replace(",", ".")}')
   self.nextPlayer()
 
 def travelling(self):
@@ -181,11 +183,11 @@ def chance_card(self):
   if hasattr(self, 'card_bg_item'):
     self.canvas.delete(self.card_bg_item)
     self.canvas.delete(self.card_text)
-  daftar_kartu = ['memenangkan kompetisi\nSains Data dan mendapat uang sebesar Rp 1.000.000', 
+  daftar_kartu = [f'memenangkan kompetisi\nSains Data dan mendapat uang sebesar Rp {f"{1000000:,}".replace(",", ".")}', 
                   'berpindah ke petak start\ndan mendapat sejumlah uang', 
-                  'dapat uang bunga dari bank \nmendapat uang sebesar Rp 250.000',
-                  'anda dapat sekarung beras dari pak zulhas\n kemudian menjualnya sebesar Rp 90.000',
-                  'Hari ini adalah ulang tahun anda.\n Lawan memberikan anda Rp 200000']
+                  f'dapat uang bunga dari bank \nmendapat uang sebesar Rp {f"{250000:,}".replace(",", ".")}',
+                  f'anda dapat sekarung beras dari pak zulhas\n kemudian menjualnya sebesar Rp {f"{90000:,}".replace(",", ".")}',
+                  f'Hari ini adalah ulang tahun anda.\n Lawan memberikan anda Rp {f"{200000:,}".replace(",", ".")}']
   self.card_bg = import_image('assets/kartu_kesempatan.png')
   self.card_bg_item = self.canvas.create_image(0, 183, anchor='nw', image=self.card_bg)
 
@@ -231,11 +233,11 @@ def badluck_card(self):
   if hasattr(self, 'card_bg_item'):
     self.canvas.delete(self.card_bg_item)
     self.canvas.delete(self.card_text)
-  daftar_kartu = ['Anda terkena penyakit dan harus\n membayar biaya rumah sakit sebesar Rp 150000',
-                'Anda diharuskan membayar biaya\n sekolah anak sebesar Rp 300000',
-                'Anda diharuskan membayar biaya\n pajak tahunan sebesar 250000',
-                'Anda menghancurkan properti tetangga,\n Bayar ganti rugi Rp 100000',
-                'Anda terkena tilang oleh pakpol \ndan harus kasih dia gocap (Rp 50.000)']
+  daftar_kartu = [f'Anda terkena penyakit dan harus\n membayar biaya rumah sakit sebesar Rp {f"{150000:,}".replace(",", ".")}',
+                f'Anda diharuskan membayar biaya\n sekolah anak sebesar Rp {f"{300000:,}".replace(",", ".")}',
+                f'Anda diharuskan membayar biaya\n pajak tahunan sebesar {f"{250000:,}".replace(",", ".")}',
+                f'Anda menghancurkan properti tetangga,\n Bayar ganti rugi Rp {f"{100000:,}".replace(",", ".")}',
+                f'Anda terkena tilang oleh pakpol \ndan harus kasih dia gocap (Rp {f"{50000:,}".replace(",", ".")})']
   self.card_bg = import_image('assets/kejadian_sial.png')
   self.card_bg_item = self.canvas.create_image(0, 183, anchor='nw', image=self.card_bg)
   match roulet:

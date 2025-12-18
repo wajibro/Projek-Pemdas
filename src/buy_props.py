@@ -39,7 +39,7 @@ for i in range(6, 11):
 for i in range(11, 17):
   town_index = list_town[i]
   koor_apar[town_index] = [(645 - (47*list_town[11])) + (47*town_index), 64], [(645+20) - (47*list_town[11]) + (47*town_index), 64]
-for i in range(17, len(list_town)-1):
+for i in range(17, len(list_town)):
   town_index = list_town[i]
   koor_apar[town_index] = [1129, 147 - (47*list_town[17]) + (47*town_index)], [1129, (147+22) - (47*list_town[17]) + (47*town_index)]
 
@@ -120,9 +120,9 @@ def list_harga(self):
   self.canvas.delete(self.show_price_item)
   self.canvas.delete(self.show_rent1_item)
   self.canvas.delete(self.show_rent2_item)
-  self.show_price_item = self.canvas.create_text(246, 360, anchor='nw', text= harga, font=('Poppins', 16), fill= 'black')
-  self.show_rent1_item = self.canvas.create_text(281, 264, anchor='nw', text= sewa1, font=('Poppins', 16), fill= 'black')
-  self.show_rent2_item = self.canvas.create_text(281, 294, anchor='nw', text= sewa2, font=('Poppins', 16), fill= 'black')
+  self.show_price_item = self.canvas.create_text(246, 360, anchor='nw', text= f'Rp {f"{int(harga):,}".replace(",", ".")}', font=('Poppins', 16), fill= 'black')
+  self.show_rent1_item = self.canvas.create_text(281, 264, anchor='nw', text= f'Rp {f"{int(sewa1):,}".replace(",", ".")}', font=('Poppins', 16), fill= 'black')
+  self.show_rent2_item = self.canvas.create_text(281, 294, anchor='nw', text= f'Rp {f"{int(sewa2):,}".replace(",", ".")}', font=('Poppins', 16), fill= 'black')
   
   if harga == 0:
     self.canvas.delete(self.show_price_item)

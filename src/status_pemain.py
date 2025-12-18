@@ -1,4 +1,5 @@
 from tkinter import *
+from tkinter import messagebox
 
 def update_data(self):
     self.player1_name = self.name_read_player('player1')
@@ -23,10 +24,10 @@ def update_data(self):
         self.player_giliran.destroy()
 
     self.player1_name_label = Label(self.frame, text=f'Player 1 - {self.player1_name}', font=('Poppins', 24), bg='white')
-    self.player1_amount_label = Label(self.frame, text=f'Rp. {self.player1_amount}', font=('Poppins', 24))
+    self.player1_amount_label = Label(self.frame, text=f'{f"{int(self.player1_amount):,}".replace(",", ".")}', font=('Poppins', 24))
 
     self.player2_name_label = Label(self.frame, text=f'Player 2 - {self.player2_name}', font=('Poppins', 24), bg='white')
-    self.player2_amount_label = Label(self.frame, text=f'Rp. {self.player2_amount}', font=('Poppins', 24))
+    self.player2_amount_label = Label(self.frame, text=f'{f"{int(self.player2_amount):,}".replace(",", ".")}', font=('Poppins', 24))
 
     self.player_giliran = Label(self.frame, text=self.which_player_name, bg='white', font=('Poppins', 24))
     
@@ -37,3 +38,8 @@ def update_data(self):
     self.player_giliran.place(x=169, y=579)
 
     self.list_harga()
+    if self.player1_name != '' and self.player2_name != '':
+        cek_uang = self.amount_read_player(self.which_player)
+        cek_uang = int(cek_uang)
+        if cek_uang <= 0:
+            self.game_over()
