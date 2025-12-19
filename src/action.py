@@ -187,7 +187,7 @@ def chance_card(self):
   daftar_kartu = [f'memenangkan kompetisi\nSains Data dan mendapat uang sebesar Rp {f"{1000000:,}".replace(",", ".")}', 
                   'berpindah ke petak start\ndan mendapat sejumlah uang', 
                   f'dapat uang bunga dari bank \nmendapat uang sebesar Rp {f"{250000:,}".replace(",", ".")}',
-                  f'anda dapat sekarung beras dari pak zulhas\n kemudian menjualnya sebesar Rp {f"{90000:,}".replace(",", ".")}',
+                  f'anda dapat sekarung beras dari\nPak Zulhas kemudian menjualnya sebesar Rp {f"{90000:,}".replace(",", ".")}',
                   f'Hari ini adalah ulang tahun anda.\n Lawan memberikan anda Rp {f"{200000:,}".replace(",", ".")}']
   self.card_bg = import_image('assets/kartu_kesempatan.png')
   self.card_bg_item = self.canvas.create_image(0, 183, anchor='nw', image=self.card_bg)
