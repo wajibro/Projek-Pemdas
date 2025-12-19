@@ -29,7 +29,7 @@ def update_data(self):
     self.player2_name_label = Label(self.frame, text=f'Player 2 - {self.player2_name}', font=('Poppins', 24), bg='white')
     self.player2_amount_label = Label(self.frame, text=f'Rp {f"{int(self.player2_amount):,}".replace(",", ".")}', font=('Poppins', 12), bg='white')
 
-    self.player_giliran = Label(self.frame, text=self.which_player_name, bg='white', font=('Poppins', 12))
+    self.player_giliran = Label(self.frame, text=self.which_player_name, bg='white', font=('Poppins', 18))
     
     self.player1_name_label.place(x=24, y=5)
     self.player1_amount_label.place(x=9, y=45)
