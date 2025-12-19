@@ -181,16 +181,16 @@ class screen4(setup): # Halaman permainan utama
     cek_uang = self.amount_read_player(self.which_player)
     cek_uang = int(cek_uang)
     if cek_uang < 0:
+      self.changeTo()
       messagebox.showinfo("Game Over", f"{self.which_player_name} telah bangkrut! {self.which_player_name_invers} memenangkan permainan.")
       self.amount_set(0)
       self.name_add('', '')
       self.giliran = False
       self.kunci_dadu = False
-      self.changeTo()
 
   def changeTo(self):
     self.hide()
-    SCREEN1.show()
+    SCREEN2.show()
 #===============================================================================================#
 # Tampilan Peta
 screen4.div = play.play_screen

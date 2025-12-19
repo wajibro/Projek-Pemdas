@@ -237,8 +237,8 @@ def badluck_card(self):
   daftar_kartu = [f'Anda terkena penyakit dan harus\n membayar biaya rumah sakit sebesar Rp {f"{150000:,}".replace(",", ".")}',
                 f'Anda diharuskan membayar biaya\n sekolah anak sebesar Rp {f"{300000:,}".replace(",", ".")}',
                 f'Anda diharuskan membayar biaya\n pajak tahunan sebesar {f"{250000:,}".replace(",", ".")}',
-                f'Anda menghancurkan properti tetangga,\n Bayar ganti rugi Rp {f"{100000:,}".replace(",", ".")}',
-                f'Anda terkena tilang oleh pakpol \ndan harus kasih dia gocap (Rp {f"{50000:,}".replace(",", ".")})']
+                f'Anda menghancurkan properti tetangga,\n Bayar ganti rugi Rp {f"{50000:,}".replace(",", ".")}',
+                f'Anda terkena tilang oleh pakpol \ndan harus kasih dia gocap (Rp {f"{100000:,}".replace(",", ".")})']
   self.card_bg = import_image('assets/kejadian_sial.png')
   self.card_bg_item = self.canvas.create_image(0, 183, anchor='nw', image=self.card_bg)
   match roulet:
