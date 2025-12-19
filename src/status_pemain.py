@@ -16,6 +16,10 @@ def update_data(self):
     self.which_player_loc = self.player2_loc if self.giliran else self.player1_loc
     self.which_player_loc_invers = self.player1_loc if self.giliran else self.player2_loc
 
+    if hasattr(self, 'player1_name_label'):
+        self.player1_name_label.destroy()
+        self.player2_name_label.destroy()
+
     if hasattr(self, 'player1_amount_label'):
         self.player1_amount_label.destroy()
     if hasattr(self, 'player2_amount_label'):
@@ -38,5 +42,3 @@ def update_data(self):
     self.player_giliran.place(x=169, y=579)
 
     self.list_harga()
-    if self.player1_name != '' and self.player2_name != '':    
-        self.game_over()

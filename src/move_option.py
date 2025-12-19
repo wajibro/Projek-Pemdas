@@ -53,6 +53,8 @@ def nextPlayer_cta(self, event=None):
   self.nextPlayer()
 
 def nextPlayer(self):
+  if self.player1_name != '' and self.player2_name != '':    
+    self.game_over()
   self.giliran = not self.giliran
   self.pawn_update()
   self.stats_update()

@@ -25,7 +25,7 @@ def play_screen(self):
   #==============================================================================#
   
   #==============================# Button #===============================#
-  self.dice_btn = Button(self.frame, text='Lempar', font=('Poppins', 10), command= self.roll_dice, pady= 2, padx = 1)
+  self.dice_btn = Button(self.frame, text='Lempar', font=('Poppins', 12), command= self.roll_dice, pady= 2, padx = 1)
   #=======================================================================#
  
   #==============================# Penempatan Gambar & Button #===============================#
