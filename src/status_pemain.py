@@ -38,8 +38,5 @@ def update_data(self):
     self.player_giliran.place(x=169, y=579)
 
     self.list_harga()
-    if self.player1_name != '' and self.player2_name != '':
-        cek_uang = self.amount_read_player(self.which_player)
-        cek_uang = int(cek_uang)
-        if cek_uang <= 0:
-            self.game_over()
+    if self.player1_name != '' and self.player2_name != '':    
+        self.game_over()

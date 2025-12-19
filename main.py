@@ -177,12 +177,17 @@ class screen4(setup): # Halaman permainan utama
     self.list_dadu = import_image('assets/dadu_0.png', png=1)
     self.dadu_img_item = self.canvas.create_image(252, 637, anchor='nw', image=self.list_dadu)
 
-  def game_over(self, event= None):
-    messagebox.showinfo("Game Over", f"{self.which_player_name} telah bangkrut! {self.which_player_name_invers} memenangkan permainan.")
-    self.amount_set(0)
-    self.name_add('', '')
-    self.hide()
-    SCREEN2.show()
+  def game_over(self):
+    cek_uang = self.amount_read_player(self.which_player)
+    cek_uang = int(cek_uang)
+    if cek_uang < 0:
+      messagebox.showinfo("Game Over", f"{self.which_player_name} telah bangkrut! {self.which_player_name_invers} memenangkan permainan.")
+      self.amount_set(0)
+      self.name_add('', '')
+      self.hide()
+      self.giliran = False
+      self.kunci_dadu = False
+      SCREEN2.show()
 #===============================================================================================#
 # Tampilan Peta
 screen4.div = play.play_screen

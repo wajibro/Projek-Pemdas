@@ -176,7 +176,7 @@ def buy1_apar(self, event=None):
 
 # Fungsi untuk membeli 2 apartement
 def buy2_apar(self, event=None):
-  harga = self.price_level()
+  harga = self.price_level()*2
   which_apar = self.apar2_img if self.giliran else self.apar1_img
   
   # Tampilan 

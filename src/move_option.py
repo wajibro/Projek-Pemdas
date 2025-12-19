@@ -31,6 +31,10 @@ def gonnaBuy(self, event=None):
   self.gonnaBuy_btn.destroy()
   self.nextPlayer_btn.destroy()
 
+  if hasattr(self, 'buy1_price'):
+    self.buy1_price.destroy()
+    self.buy2_price.destroy()
+
   self.buy1_btn = Button(self.frame, text= 'Bangun 1 Apartement', command= self.buy1_apar, font=('Poppins', 8))
   self.buy2_btn = Button(self.frame, text= 'Bangun 2 Apartement', command= self.buy2_apar, font=('Poppins', 8))
 
