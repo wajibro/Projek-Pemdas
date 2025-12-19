@@ -9,8 +9,8 @@ def ask(self):
   prop_cache_invers = self.props_read(self.which_player_invers)
 
   if self.which_player_loc in list_town:
-    self.gonnaBuy_btn = Button(self.frame, text= 'Beli Properti', command= self.gonnaBuy, font=('Poppins', 18))
-    self.nextPlayer_btn = Button(self.frame, text= 'Lanjut', command= self.nextPlayer, font=('Poppins', 18))
+    self.gonnaBuy_btn = Button(self.frame, text= 'Beli Properti', command= self.gonnaBuy, font=('Poppins', 12))
+    self.nextPlayer_btn = Button(self.frame, text= 'Lanjut', command= self.nextPlayer, font=('Poppins', 12))
 
     self.gonnaBuy_btn.place(x= 41, y= 499)
     self.nextPlayer_btn.place(x= 221, y= 499)
@@ -31,17 +31,17 @@ def gonnaBuy(self, event=None):
   self.gonnaBuy_btn.destroy()
   self.nextPlayer_btn.destroy()
 
-  self.buy1_btn = Button(self.frame, text= 'Bangun 1 Apartement', command= self.buy1_apar, font=('Poppins', 12))
-  self.buy2_btn = Button(self.frame, text= 'Bangun 2 Apartement', command= self.buy2_apar, font=('Poppins', 12))
+  self.buy1_btn = Button(self.frame, text= 'Bangun 1 Apartement', command= self.buy1_apar, font=('Poppins', 8))
+  self.buy2_btn = Button(self.frame, text= 'Bangun 2 Apartement', command= self.buy2_apar, font=('Poppins', 8))
 
-  self.buy1_price = Label(self.frame, text= f'-Rp {f"{int(harga):,}".replace(",", ".")}', fg= 'red', bg= 'white', font= ('Poppins', 16))
-  self.buy2_price = Label(self.frame, text= f'-Rp {f"{int(harga*2):,}".replace(",", ".")}', fg= 'red', bg= 'white', font= ('Poppins', 16))
+  self.buy1_price = Label(self.frame, text= f'-Rp {f"{int(harga):,}".replace(",", ".")}', fg= 'red', bg= 'white', font= ('Poppins', 10))
+  self.buy2_price = Label(self.frame, text= f'-Rp {f"{int(harga*2):,}".replace(",", ".")}', fg= 'red', bg= 'white', font= ('Poppins', 10))
 
   self.buy1_btn.place(x= 53, y= 480)
   self.buy2_btn.place(x= 225, y= 480)
 
-  self.buy1_price.place(x= 68, y= 511)
-  self.buy2_price.place(x= 230, y= 511)
+  self.buy1_price.place(x= 68, y= 516)
+  self.buy2_price.place(x= 230, y= 516)
 
 def nextPlayer_cta(self, event=None):
   self.gonnaBuy_btn.destroy()

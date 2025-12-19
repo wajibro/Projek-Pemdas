@@ -81,6 +81,7 @@ def pay_rent(self):
 
     # Hitung harga sewa dasar
     base_rent = self.price_level()  # Tanpa parameter, atau dengan parameter yang sesuai
+    base_rent -= base_rent/2
     
     # Versi 1: Jika price_level tidak perlu parameter lokasi
     player_amount = int(self.amount_read_player(self.which_player)) - base_rent

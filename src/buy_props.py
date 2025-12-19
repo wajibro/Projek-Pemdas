@@ -111,7 +111,7 @@ def list_harga(self):
   harga = self.price_level()
   sewa1 = harga - (harga /2)
   sewa1 = int(sewa1)
-  sewa2 = harga + (sewa1 /2) 
+  sewa2 = sewa1 * 2
   sewa2 = int(sewa2)
 
   self.town_title_bg = self.bg_image(self.which_player_loc)

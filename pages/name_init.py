@@ -34,9 +34,9 @@ def name_init_screen(self):
   #==============================================================================#
 
   #==============================# Inisiasi Entry & Button #===============================#
-  self.player1_entry = Entry(self.frame, width= 30, font=('Poppins', 12), textvariable=self.player1_name, bg='#C3D827')
-  self.player2_entry = Entry(self.frame, width= 30, font=('Poppins', 12), textvariable=self.player2_name, bg='#C3D827')
-  self.modal_amount= Entry(self.frame, width= 30, font=('Poppins', 12), textvariable=self.modal_amount, bg='#C3D827')
+  self.player1_entry = Entry(self.frame, width= 35, font=('Poppins', 12), textvariable=self.player1_name, bg='#C3D827')
+  self.player2_entry = Entry(self.frame, width= 35, font=('Poppins', 12), textvariable=self.player2_name, bg='#C3D827')
+  self.modal_amount= Entry(self.frame, width= 28, font=('Poppins', 12), textvariable=self.modal_amount, bg='#C3D827')
   self.btn_start= Button(self.frame, image= self.btn_bg, command= self.changeTo, bg='#9BB3CD', bd=0, highlightthickness= 0 )
   #========================================================================================#
   
@@ -49,7 +49,7 @@ def name_init_screen(self):
   self.canvas.create_window(410, 570, anchor= 'nw', window= self.btn_start)
   self.player1_entry.place(x= 539, y= 270)
   self.player2_entry.place(x= 539, y= 360)
-  self.modal_amount.place(x= 609, y= 482)
+  self.modal_amount.place(x= 600, y= 482)
   #===================================================================================================#
 #========================== End desain halaman inisialisasi nama pemain ==========================#
 

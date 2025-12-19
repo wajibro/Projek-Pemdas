@@ -24,17 +24,17 @@ def update_data(self):
         self.player_giliran.destroy()
 
     self.player1_name_label = Label(self.frame, text=f'Player 1 - {self.player1_name}', font=('Poppins', 24), bg='white')
-    self.player1_amount_label = Label(self.frame, text=f'{f"{int(self.player1_amount):,}".replace(",", ".")}', font=('Poppins', 24))
+    self.player1_amount_label = Label(self.frame, text=f'Rp {f"{int(self.player1_amount):,}".replace(",", ".")}', font=('Poppins', 12), bg='white')
 
     self.player2_name_label = Label(self.frame, text=f'Player 2 - {self.player2_name}', font=('Poppins', 24), bg='white')
-    self.player2_amount_label = Label(self.frame, text=f'{f"{int(self.player2_amount):,}".replace(",", ".")}', font=('Poppins', 24))
+    self.player2_amount_label = Label(self.frame, text=f'Rp {f"{int(self.player2_amount):,}".replace(",", ".")}', font=('Poppins', 12), bg='white')
 
-    self.player_giliran = Label(self.frame, text=self.which_player_name, bg='white', font=('Poppins', 24))
+    self.player_giliran = Label(self.frame, text=self.which_player_name, bg='white', font=('Poppins', 12))
     
-    self.player1_name_label.place(x=24, y=7)
-    self.player1_amount_label.place(x=9, y=40)
+    self.player1_name_label.place(x=24, y=5)
+    self.player1_amount_label.place(x=9, y=45)
     self.player2_name_label.place(x=24, y=84)
-    self.player2_amount_label.place(x=9, y=120)
+    self.player2_amount_label.place(x=9, y=130)
     self.player_giliran.place(x=169, y=579)
 
     self.list_harga()

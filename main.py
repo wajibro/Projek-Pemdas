@@ -179,7 +179,7 @@ class screen4(setup): # Halaman permainan utama
 
   def game_over(self, event= None):
     messagebox.showinfo("Game Over", f"{self.which_player_name} telah bangkrut! {self.which_player_name_invers} memenangkan permainan.")
-    self.amount_set(None)
+    self.amount_set(0)
     self.name_add('', '')
     self.hide()
     SCREEN2.show()
@@ -274,7 +274,7 @@ SCREEN4 = screen4(window)
 
 def tutup_jendela(event= None):
     if messagebox.askyesno("Keluar", "Apakah Anda yakin ingin keluar dari permainan?"):
-        SCREEN3.amount_set(None)
+        SCREEN3.amount_set(0)
         SCREEN3.name_add('', '')
         SCREEN4.props_add('player1', '')
         SCREEN4.props_add('player2', '')
