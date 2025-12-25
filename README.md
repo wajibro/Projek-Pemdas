@@ -1,233 +1,111 @@
-# Proyek Pemdas - Game Monopoly Indonesia
+# Proyek Pemdas - Game Monopoly Indonesia v2.0
 
-Proyek ini adalah implementasi game Monopoly yang disesuaikan dengan konteks Indonesia, dibangun menggunakan bahasa pemrograman Python dengan library Tkinter untuk antarmuka grafis dan PIL untuk manipulasi gambar.
+Proyek ini adalah implementasi game Monopoly yang disesuaikan dengan konteks Indonesia, dibangun menggunakan bahasa pemrograman Python dengan library Tkinter. Versi 2.0 membawa perubahan besar, termasuk mekanika permainan baru dan perbaikan arsitektur kode.
+
+## Apa yang Baru di v2.0?
+- **Mekanika Ular Tangga**: Beberapa petak di papan sekarang berfungsi sebagai ular atau tangga, memindahkan pemain ke posisi baru secara tak terduga.
+- **Refactoring Logika Game**: Logika inti permainan dan penanganan data pemain telah disentralisasi ke dalam modul `data_handle.py` untuk meningkatkan modularitas dan kemudahan pengelolaan.
+- **Penyimpanan Data Dalam Memori**: Sistem penyimpanan data pemain berbasis file `.txt` telah diganti dengan manajemen data di dalam memori selama sesi permainan, menghasilkan gameplay yang lebih cepat dan lancar.
+- **Perbaikan Bug**: Berbagai perbaikan bug terkait giliran pemain, kondisi game over, dan event kartu telah diimplementasikan.
 
 ## Struktur Proyek
 
 ```
 projek-pemdas/
 ├── main.py                 # File utama program
+├── README.md               # File ini
 ├── assets/                 # Folder untuk aset gambar
-│   ├── apar_1.png         # Gambar apartemen pemain 1
-│   ├── apar_2.png         # Gambar apartemen pemain 2
-│   ├── background.png     # Latar belakang utama
-│   ├── bg_town1-8.png     # Latar belakang info kota
-│   ├── btn_name_init.png  # Tombol inisialisasi nama
-│   ├── btn_start.png      # Tombol mulai
-│   ├── dadu_0-6.png       # Gambar dadu
-│   ├── kartu_kesempatan.png # Kartu kesempatan
-│   ├── kejadian_sial.png  # Kartu kejadian sial
-│   ├── logo_M.png         # Logo game
-│   ├── modal_entry.png    # Modal input
-│   ├── monopoly_guy.png   # Karakter Monopoly
-│   ├── penjara.png        # Gambar penjara
-│   ├── peta.png           # Peta permainan
-│   ├── player_1.png       # Bidak pemain 1
-│   ├── player_2.png       # Bidak pemain 2
-│   ├── player1_entry.png  # Input pemain 1
-│   ├── player2_entry.png  # Input pemain 2
-│   ├── Poppins-Regular.ttf # Font custom
-│   ├── Press Enter to Start.png
-│   ├── team-screen.png    # Layar tim
-│   └── title_sub.png      # Subjudul
-├── pages/                 # Folder untuk halaman UI
-│   ├── loadscreen.py      # Layar loading dan splash screen
-│   ├── name_init.py       # Halaman inisialisasi nama pemain
-│   └── play.py            # Halaman utama permainan
-├── src/                   # Folder untuk logika backend
-│   ├── action.py          # Sistem aksi permainan (sewa, pajak, bonus, dll)
-│   ├── bidak.py           # Sistem pergerakan bidak pemain
-│   ├── buy_props.py       # Sistem pembelian properti
-│   ├── config.py          # Konfigurasi jendela
-│   ├── crud_player.py     # Manajemen data pemain
-│   ├── dadu.py            # Sistem lempar dadu
-│   ├── kordinat.py        # Koordinat peta permainan
-│   ├── move_option.py     # Opsi pergerakan pemain
-│   ├── status_pemain.py   # Update status pemain
-│   └── data_pemain/       # Folder data pemain
-│       ├── nama/
-│       │   ├── player1_name.txt
-│       │   └── player2_name.txt
-│       ├── properti/
-│       │   ├── player1_props.txt
-│       │   └── player2_props.txt
-│       └── uang/
-│           ├── player1_amount.txt
-│           └── player2_amount.txt
-└── test/                  # Folder untuk testing
-    └── fullscreen.py      # Test fullscreen
+├── pages/                  # Folder untuk modul UI per halaman
+│   ├── loadscreen.py
+│   ├── name_init.py
+│   ├── opsi_ui.py
+│   └── play.py
+├── src/                    # Folder untuk logika backend
+│   ├── action.py
+│   ├── bidak.py
+│   ├── buy_props.py
+│   ├── config.py
+│   ├── dadu.py
+│   ├── data_handle.py      # Modul logika utama & data
+│   ├── kordinat.py
+│   ├── move_option.py
+│   ├── status_pemain.py
+│   └── ular_tangga.py      # Modul mekanika ular tangga
+└── test/                   # Folder untuk skrip testing
 ```
 
-## Deskripsi File Utama
+## Deskripsi Modul Utama
 
-### main.py
-File utama yang menjalankan seluruh program. Berisi:
-- Setup jendela Tkinter dengan konfigurasi fullscreen
-- Import semua modul yang diperlukan
-- Definisi class untuk setiap layar (screen1-4)
-- Sistem navigasi antar layar
-- Event handling untuk fullscreen dan exit
-- Inisialisasi game loop
+### `main.py`
+File utama yang menjalankan seluruh aplikasi. Bertanggung jawab untuk:
+- Setup jendela utama Tkinter.
+- Inisialisasi dan manajemen setiap layar/halaman permainan.
+- Mengatur navigasi antar layar.
+- Menangani event global seperti fullscreen (F11) dan keluar (Esc).
 
-Fitur utama:
-- Fullscreen toggle dengan F11
-- Exit fullscreen dengan Escape
-- Window close handler dengan konfirmasi
+### `pages/`
+Setiap file dalam direktori ini mengelola satu halaman atau layar spesifik dari antarmuka pengguna (UI), dari layar pemuatan awal hingga papan permainan utama.
 
-### pages/loadscreen.py
-Menangani layar loading dan splash screen:
-- `splash1()`: Menampilkan layar tim dengan logo
-- `showof1()`: Transisi ke layar utama dengan background dan logo
-- `splash2()`: Layar awal dengan background biru
-- `showof2()`: Menampilkan karakter Monopoly, judul, dan tombol start
+### `src/`
+Direktori ini berisi semua logika inti (backend) dari permainan.
 
-### pages/name_init.py
-Halaman inisialisasi nama pemain:
-- Input field untuk nama pemain 1 dan 2
-- Validasi input nama
-- Transisi ke layar permainan utama
+- **`data_handle.py`**: Merupakan otak dari permainan di v2.0.
+  - **`cek_petak()`**: Fungsi sentral yang menentukan aksi apa yang harus diambil berdasarkan posisi pemain di papan (misalnya, membeli properti, membayar pajak, atau mendarat di petak ular/tangga).
+  - Mengelola status pemain (uang dan properti) di dalam memori selama permainan berjalan.
 
-### pages/play.py
-Halaman utama permainan:
-- Menampilkan peta Monopoly Indonesia
-- UI untuk status pemain (nama, uang)
-- Area untuk informasi properti
-- Tombol-tombol aksi permainan
+- **`ular_tangga.py`**: Mengimplementasikan mekanika ular tangga. Saat pemain mendarat di petak tertentu, modul ini dipanggil untuk memindahkan pemain ke posisi baru.
 
-## Modul Backend (src/)
+- **`action.py`**: Berisi implementasi dari berbagai aksi di papan permainan seperti membayar sewa, mengambil kartu kesempatan, membayar pajak, dan lain-lain.
 
-### action.py
-Menangani semua aksi permainan:
-- `pay_rent()`: Sistem pembayaran sewa
-- `cek_petak()`: Pengecekan petak yang dilewati
-- `start_bonus()`: Bonus melewati start
-- `pay_tax()`: Pembayaran pajak
-- `pay_needs()`: Pembayaran kebutuhan (air/listrik)
-- `bansos()`: Bantuan sosial
-- `travelling()`: Kartu perjalanan
-- `chance_card()`: Kartu kesempatan
-- `badluck_card()`: Kartu sial
-- `pulau_asing()`: Event pulau asing
-- `penjara()`: Sistem penjara
+- **`buy_props.py`**: Mengelola logika pembelian properti (apartemen) oleh pemain, termasuk daftar harga properti yang dibagi berdasarkan tingkatan kota.
 
-### buy_props.py
-Sistem pembelian properti:
-- Daftar kota-kota di Indonesia (23 kota)
-- Sistem harga berdasarkan tier kota
-- Fungsi pembelian 1 atau 2 apartemen
-- Penyimpanan data properti pemain
-- Perhitungan sewa berdasarkan jumlah properti
+- **`dadu.py` & `bidak.py`**: Mengatur fungsionalitas lempar dadu dan pergerakan visual bidak pemain di papan permainan.
 
-Kota-kota yang tersedia:
-- Tier 1: Medan, Makassar, Semarang
-- Tier 2: Bandung, Surabaya, Batam
-- Tier 3: Bekasi, Tanggerang, Depok
-- Tier 4: Jakarta, Banten
-- Tier 5: Ternate, Ambon, Irian
-- Tier 6: Padang, Palembang, Lampung
-- Tier 7: Pontianak, Banjarmasin
-- Tier 8: Balikpapan, Jogja, Solo, Denpasar
+- **`status_pemain.py`**: Mengatur pembaruan informasi status pemain (nama dan uang) yang ditampilkan di UI.
 
-### crud_player.py
-Manajemen data pemain:
-- `name_add()`: Menyimpan nama pemain
-- `name_read_player()`: Membaca nama pemain
-- `amount_set()`: Set jumlah uang awal
-- `amount_add_player()`: Menambah/kurangi uang pemain
-- `amount_read_player()`: Membaca jumlah uang pemain
-
-### dadu.py
-Sistem lempar dadu:
-- `roll_dice()`: Generate angka acak 1-6
-- `pos_increase()`: Update posisi pemain
-- `dice_img()`: Update tampilan gambar dadu
-- `dadu_update()`: Refresh UI dadu
-
-### bidak.py
-Sistem pergerakan bidak:
-- Update posisi visual bidak pemain di peta
-- Sinkronisasi dengan koordinat dari kordinat.py
-
-### status_pemain.py
-Update tampilan status pemain:
-- `update_data()`: Refresh nama dan jumlah uang pemain
-- Sinkronisasi dengan data dari crud_player.py
-
-### move_option.py
-Opsi pergerakan pemain:
-- `ask()`: Dialog pembelian properti atau lanjut
-- `gonnaBuy()`: Pilihan untuk beli properti
-- `nextPlayer()`: Ganti giliran pemain
-
-### kordinat.py
-Koordinat peta permainan:
-- Array koordinat X dan Y untuk setiap petak
-- Pemetaan posisi bidak pemain
-
-### config.py
-Konfigurasi jendela:
-- Setup ukuran jendela (1280x720)
-- Konfigurasi canvas utama
+- **`move_option.py`**: Menyajikan dialog dan opsi kepada pemain setelah bergerak, seperti pilihan untuk membeli properti atau mengakhiri giliran.
 
 ## Mekanika Permainan
 
 ### Alur Permainan
-1. **Loading Screen**: Tampilan splash screen tim
-2. **Main Menu**: Layar utama dengan tombol start
-3. **Name Initialization**: Input nama pemain 1 dan 2
-4. **Main Game**: Permainan Monopoly Indonesia
+1.  **Layar Pemuatan**: Aplikasi dimulai dengan splash screen.
+2.  **Menu Utama**: Pemain menekan 'Enter' untuk memulai.
+3.  **Inisialisasi Pemain**: Pemain memasukkan nama untuk Player 1 dan Player 2.
+4.  **Permainan Utama**: Papan permainan ditampilkan dan permainan dimulai.
 
 ### Aturan Dasar
-- 2 pemain bergantian
-- Lempar dadu untuk bergerak
-- Beli properti di kota-kota Indonesia
-- Bayar sewa saat mendarat di properti lawan
-- Berbagai event khusus (kartu, pajak, bonus)
-- Pemain kalah jika uang habis (bangkrut)
+- Dua pemain bermain secara bergantian.
+- Pemain melempar dadu untuk bergerak di sekitar papan.
+- Pemain dapat membeli properti (apartemen) di berbagai kota di Indonesia.
+- Mendarat di properti lawan mengharuskan pemain membayar sewa.
+- Pemenang ditentukan saat salah satu pemain kehabisan uang (bangkrut).
 
-### Sistem Uang
-- Uang awal: Rp 1.500.000 per pemain
-- Bonus start: Rp 200.000
-- Harga properti bervariasi berdasarkan tier kota
-- Sewa = 50% harga properti (1 apartemen) atau 100% (2 apartemen)
-
-### Event Khusus
-- **Start**: Bonus Rp 200.000
-- **Pajak**: Bayar berdasarkan jumlah properti
-- **Kebutuhan**: Bayar air/listrik berdasarkan properti
-- **Bansos**: Dapat Rp 20.000-50.000
-- **Travelling**: Pilih petak tujuan
-- **Chance Card**: Kartu kesempatan acak
-- **Bad Luck Card**: Kartu sial acak
-- **Pulau Asing**: Stuck sampai lempar 6 atau bayar Rp 100.000
-- **Penjara**: Skip 1 giliran
+### Event & Petak Khusus
+- **Start**: Melewati petak 'Start' memberikan bonus uang.
+- **Properti**: Dapat dibeli jika belum dimiliki. Jika dimiliki lawan, pemain harus bayar sewa.
+- **Pajak**: Pemain harus membayar sejumlah pajak.
+- **Kartu Kesempatan/Sial**: Pemain mengambil kartu yang memberikan efek positif atau negatif.
+- **Penjara**: Pemain kehilangan satu giliran.
+- **Ular Tangga**: Mendarat di petak ini akan memindahkan pemain ke petak lain, bisa maju (tangga) atau mundur (ular).
 
 ## Cara Menjalankan
 
-1. Pastikan Python 3.x terinstall
-2. Install dependencies:
-   ```bash
-   pip install pillow
-   ```
-3. Jalankan program:
-   ```bash
-   python main.py
-   ```
+1.  Pastikan Python 3.x terinstall di sistem Anda.
+2.  Install library yang dibutuhkan:
+    ```bash
+    pip install pillow
+    ```
+3.  Jalankan program dari direktori root:
+    ```bash
+    python main.py
+    ```
 
 ## Kontrol
-- **F11**: Toggle fullscreen
-- **Escape**: Exit fullscreen
-- **Mouse**: Klik tombol dan interaksi UI
+-   **F11**: Masuk/Keluar mode layar penuh (fullscreen).
+-   **Escape**: Keluar dari mode layar penuh.
+-   **Mouse**: Digunakan untuk semua interaksi dalam game (klik tombol).
 
-## Teknologi yang Digunakan
-- **Python 3.x**: Bahasa pemrograman utama
-- **Tkinter**: GUI framework
-- **PIL (Pillow)**: Manipulasi gambar
-- **OS/CTypes**: Load font custom
-
-## Tim Pengembang
-- Wajibro (Lead Developer)
-- Tim Pemdas
-
-## Lisensi
-Proyek ini dibuat untuk tujuan edukasi dalam mata kuliah Pemrograman Dasar.
+## Teknologi
+-   **Python 3.x**: Bahasa pemrograman utama.
+-   **Tkinter**: Framework standar Python untuk GUI.
+-   **Pillow (PIL Fork)**: Library untuk memanipulasi dan menampilkan gambar.

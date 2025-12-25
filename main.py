@@ -84,6 +84,8 @@ class screen1(setup): # Halaman Loading Awal
   def __init__(self, master):
     super().__init__(master)
     # Tampilkan halaman saat program dijalankan
+    self.show()
+
     self.master.after(5000, self.showof)
 
   def changeTo(self):
@@ -241,8 +243,8 @@ screen4.show_apar    = buy_props.show_apar
 #===============================================================#
 #============================================================================================#
 
-# SCREEN1 = screen1(window)
-# SCREEN2 = screen2(window)
+SCREEN1 = screen1(window)
+SCREEN2 = screen2(window)
 SCREEN3 = screen3(window)
 SCREEN4 = screen4(window)
 
