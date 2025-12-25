@@ -39,7 +39,7 @@ def play_screen(self):
   self.player1_pawnItem = self.canvas.create_image(1098, 602, anchor='nw', image=self.player1_pawn) 
   self.player2_pawnItem = self.canvas.create_image(1102, 605, anchor='nw', image=self.player2_pawn)
   self.dadu_img_item = self.canvas.create_image(252, 637, anchor='nw', image=self.list_dadu)
-  self.dice_btn.place(x=29, y=644)
+  self.dice_btn_item = self.canvas.create_window(29, 644, anchor='nw', window=self.dice_btn)
   #===========================================================================================#
 
   self.show_price_item = self.canvas.create_text(246, 360, anchor='nw', text= '0', font=('Poppins', 16), fill= 'black')

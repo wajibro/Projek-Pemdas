@@ -39,7 +39,7 @@ def name_init_screen(self):
   self.modal_amount= Entry(self.frame, width= 28, font=('Poppins', 12), textvariable=self.modal_amount, bg='#C3D827')
   self.btn_start= Button(self.frame, image= self.btn_bg, command= self.changeTo, bg='#9BB3CD', bd=0, highlightthickness= 0 )
   #========================================================================================#
-  
+
   #==============================# Penempatan Gambar, Entry, & Button #===============================#
   self.canvas.create_image(0, 0, anchor='nw', image= self.bg)
   self.canvas.create_image(442.05, 96, anchor='nw', image= self.title)

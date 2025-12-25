@@ -172,7 +172,6 @@ class screen4(setup):
 
     self.stats_update()
 
-
   def game_over(self):
     cek_uang = self.which_player_amount_read(self.which_player)
     cek_uang = int(cek_uang)
