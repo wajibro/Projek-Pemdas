@@ -1,4 +1,4 @@
-def x(self):
+def pawn_update(self):
   self.canvas.delete(self.player1_pawnItem)
   self.canvas.delete(self.player2_pawnItem)
   self.canvas.delete(self.penjara_img)

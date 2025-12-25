@@ -22,6 +22,7 @@ def play_screen(self):
   self.player1_pawn = import_image('assets/player_1.png', png= 1)
   self.player2_pawn = import_image('assets/player_2.png', png= 1)
   self.penjara_import = import_image('assets/penjara.png', png= 1)
+  self.list_dadu = import_image('assets/dadu_0.png', png=1)
   #==============================================================================#
   
   #==============================# Button #===============================#
@@ -37,6 +38,7 @@ def play_screen(self):
   self.penjara_img = self.canvas.create_image(1067, 66, anchor='nw', image=self.penjara_import)
   self.player1_pawnItem = self.canvas.create_image(1098, 602, anchor='nw', image=self.player1_pawn) 
   self.player2_pawnItem = self.canvas.create_image(1102, 605, anchor='nw', image=self.player2_pawn)
+  self.dadu_img_item = self.canvas.create_image(252, 637, anchor='nw', image=self.list_dadu)
   self.dice_btn.place(x=29, y=644)
   #===========================================================================================#
 

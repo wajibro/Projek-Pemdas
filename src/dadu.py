@@ -53,77 +53,33 @@ def roll_dice(self, event= None):
     return
 
   # Logika giliran normal (status 0)
-  elif self.kunci_dadu == False:
+  else:
     self.dadu_num = random.randint(1,6)
     self.pos_increase()
-    self.action_allow = True
-
-    cek_petak = self.cek_petak()
     self.stats_update()
-    if not cek_petak:
-      self.ask()
 
     if self.move_latch == False and move_point < 2:
       move_point += 1
     if move_point >= 2:
       self.move_latch = True
     return self.dadu_num
-  else:
-    messagebox.showwarning('Perhatikan', "Giliran anda sudah selesai\nPilih opsi 'Beli Properti' atau 'Lanjut'")
 
 def pos_increase(self):
-    if self.giliran == False:
-      self.player1_loc += self.dadu_num
-      if self.player1_loc > 40:
-        self.player1_loc = self.player1_loc - 40
-        self.start_bonus()
-    
-    elif self.giliran == True:
+    if self.giliran:
       self.player2_loc += self.dadu_num
       if self.player2_loc > 40:
         self.player2_loc = self.player2_loc - 40
         self.start_bonus()
-
-    match self.player1_loc:
-      case 4: # Tangga 1
-        self.pawn_update()
-        messagebox.showinfo(f'{self.player1_name} - Telah Berubah Posisi', f'{self.player1_name}, Anda tidak sengaja menemukan tangga')
-        self.player1_loc = 38
-      case 18: # Tangga 2
-        self.pawn_update()
-        messagebox.showinfo(f'{self.player1_name} - Telah Berubah Posisi', f'{self.player1_name}, Anda tidak sengaja menemukan tangga')
-        self.player1_loc = 24
-      case 14: # Ular 1
-        self.pawn_update()
-        messagebox.showinfo(f'{self.player1_name} - Telah Berubah Posisi', f'{self.player1_name}, Anda telah dimakan sang ular')
-        self.player1_loc = 7
-      case 27: # Ular 2
-        self.pawn_update()
-        messagebox.showinfo(f'{self.player1_name} - Telah Berubah Posisi', f'{self.player1_name}, Anda telah dimakan sang ular')
-        self.player1_loc = 35
-
-    match self.player2_loc:
-      case 4: # Tangga 1
-        self.pawn_update()
-        messagebox.showinfo(f'{self.player2_name} - Telah Berubah Posisi', f'{self.player2_name}, Anda tidak sengaja menemukan tangga')
-        self.player2_loc = 38
-      case 18: # Tangga 2         
-        self.pawn_update()
-        messagebox.showinfo(f'{self.player1_name} - Telah Berubah Posisi', f'{self.player2_name}, Anda tidak sengaja menemukan tangga')
-        self.player2_loc = 24
-      case 14: # Ular 1
-        self.pawn_update()
-        messagebox.showinfo(f'{self.player1_name} - Telah Berubah Posisi', f'{self.player2_name}, Anda telah dimakan sang ular')
-        self.player2_loc = 7
-      case 27: # Ular 2
-        self.pawn_update()
-        messagebox.showinfo(f'{self.player1_name} - Telah Berubah Posisi', f'{self.player2_name}, Anda telah dimakan sang ular')
-        self.player2_loc = 35
+    else:
+      self.player1_loc += self.dadu_num
+      if self.player1_loc > 40:
+        self.player1_loc = self.player1_loc - 40
+        self.start_bonus()
       
     self.pawn_update()
     self.stats_update()
     self.dadu_update()
-    self.kunci_dadu = True
+    self.cek_petak()
     
 def dadu_update(self):
   self.list_dadu = self.dice_img(self.dadu_num)

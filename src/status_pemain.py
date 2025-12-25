@@ -2,11 +2,6 @@ from tkinter import *
 from tkinter import messagebox
 
 def update_data(self):
-    self.player1_name = self.name_read_player('player1')
-    self.player2_name = self.name_read_player('player2')
-    self.player1_amount = self.amount_read_player('player1')
-    self.player2_amount = self.amount_read_player('player2')
-
     self.which_player = 'player2' if self.giliran else 'player1'
     self.which_player_invers = 'player1' if self.giliran else 'player2'
 

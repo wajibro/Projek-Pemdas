@@ -16,8 +16,8 @@ def import_image(src, resize= None, png= None): # Fungsi untuk mengimport gambar
 #========================== desain halaman inisialisasi nama pemain #==========================#
 def name_init_screen(self):
   #==============================# Inisialisasi Variabel #==============================#
-  self.player1_name= StringVar()
-  self.player2_name= StringVar()
+  self.player1_name_entry= StringVar()
+  self.player2_name_entry= StringVar()
   self.modal_amount= StringVar()
   #==============================# End Inisialisasi Variabel #==============================#
 
@@ -34,8 +34,8 @@ def name_init_screen(self):
   #==============================================================================#
 
   #==============================# Inisiasi Entry & Button #===============================#
-  self.player1_entry = Entry(self.frame, width= 35, font=('Poppins', 12), textvariable=self.player1_name, bg='#C3D827')
-  self.player2_entry = Entry(self.frame, width= 35, font=('Poppins', 12), textvariable=self.player2_name, bg='#C3D827')
+  self.player1_entry = Entry(self.frame, width= 35, font=('Poppins', 12), textvariable=self.player1_name_entry, bg='#C3D827')
+  self.player2_entry = Entry(self.frame, width= 35, font=('Poppins', 12), textvariable=self.player2_name_entry, bg='#C3D827')
   self.modal_amount= Entry(self.frame, width= 28, font=('Poppins', 12), textvariable=self.modal_amount, bg='#C3D827')
   self.btn_start= Button(self.frame, image= self.btn_bg, command= self.changeTo, bg='#9BB3CD', bd=0, highlightthickness= 0 )
   #========================================================================================#
@@ -54,13 +54,11 @@ def name_init_screen(self):
 #========================== End desain halaman inisialisasi nama pemain ==========================#
 
 #============================== Fungsi Mengubah halaman ke permainan utama ======================#
-def changeTo(self):
-  self.name_add(self.player1_name.get(), self.player2_name.get())
+def changeTo(self, event= None):
+  self.player1_name = self.player1_name_entry.get()
+  self.player2_name = self.player2_name_entry.get()
 
-  cekNama1 = self.name_read_player('player1')
-  cekNama2 = self.name_read_player('player2')
-
-  if cekNama1 == '' or cekNama2 == '':
+  if self.player1_name == '' or self.player2_name == '':
     messagebox.showerror('Perhatikan!!', "Nama pemain tidak boleh kosong!")
     return
     
@@ -74,7 +72,7 @@ def changeTo(self):
     messagebox.showerror('Perhatikan!!', "Jumlah modal harus minimal 1.000.000!")
     return
   
-  self.amount_set(modal)
+  self.player_amount = self.modal_amount.get()
   
   self.hide()
   self.screen4()
